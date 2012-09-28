@@ -1,35 +1,14 @@
+/*
+  parallelPlayer Class
+  Load two sequences of video parts to be played in parallel.
+  MouseOver triggers focus on video, focus data is captured and send to db.
 
-function testLoad (vpIdsStr) {
-  console.log("TEST LOAD");
-  document.addEventListener("DOMContentLoaded", function () {
-    var clipList1 = [
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_01.webm", in: 30,  out: 40},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_02.webm", in: 20,  out: 30},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_03.webm", in: 10,  out: 20},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_05.webm", in: 30,  out: 40},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_07.webm", in: 20,  out: 30},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_09.webm", in: 10,  out: 20},                                                              
-    ];                                              
-    var clipList2 = [                               
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_04.webm", in: 10,  out: 20}, 
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_11.webm", in: 20,  out: 30},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_05.webm", in: 30,  out: 40},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_03.webm", in: 10,  out: 20},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_09.webm", in: 20,  out: 30},
-      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_01.webm", in: 30,  out: 40},
-    ];
-    
-    // console.log("CL1: ", clipList1, "CL2: ", clipList2);
-    player = new parallelPlayer(clipList1, clipList2);
-    player.setVpIds(vpIdsStr);
-    player.setRecurring(true);
-        
-  }, false); // DOM content loaded
-}
+  create new (must be global): objName = new parallelPlayer([objname], interactionWrapperId, clipList1, clipList2);
+  needs jQuery
+*/
 
 // Parallel Player class for 2 sequences playing in parallel
-// function parallelPlayer(objName, containerIds, playerWrapperIds, clipList1, clipList2){
-function parallelPlayer(objName, clipList1, clipList2){
+function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   // debug flag
   this.debug = true;
   this.playerObjName = objName;
@@ -42,10 +21,14 @@ function parallelPlayer(objName, clipList1, clipList2){
     console.log("sequences must have same length");
     return false;
   }
-  this.containerIds = [ "sequencePlayer1", "sequencePlayer2" ];
-  this.playerWrapperIds = [ "playerWrapper1", "playerWrapper2" ];
-  //   this.containerIds = containerIds;
-  // this.playerWrapperIds = playerWrapperIds;
+  
+  // set containerIds, playerWrapperIds based on interactionWrapperId  
+  var containerId1 = $("#"+interactionWrapperId+" .videoBox:eq(0)").attr("id");
+  var containerId2 = $("#"+interactionWrapperId+" .videoBox:eq(1)").attr("id");
+  var playerWrapperId1 = $("#"+interactionWrapperId+" .playerWrapper:eq(0)").attr("id");
+  var playerWrapperId2 = $("#"+interactionWrapperId+" .playerWrapper:eq(1)").attr("id");
+  this.containerIds = [ containerId1, containerId2 ];  
+  this.playerWrapperIds = [ playerWrapperId1, playerWrapperId2 ];  
 
 	// TODO jQuery create:
 	//  containerId elements
@@ -331,16 +314,21 @@ function parallelPlayer(objName, clipList1, clipList2){
       console.log("seq 0 canplaythrough");
       self.canPlayThrough[0] = true;
       if (self.canPlayThrough[1]) {
-        self.insertPlayButton();
-        self.hideLoading();
+        // TODO fix ugly hack: delay button_insert to be sure seq is loaded
+        setTimeout ( function(){
+          self.insertPlayButton();
+          self.hideLoading();
+        }, 3000 );
       };
     });
     self.seqs[1].listen("canplaythrough", function(){
       console.log("seq 1 canplaythrough");
       self.canPlayThrough[1] = true;
       if (self.canPlayThrough[0]) {
-        self.insertPlayButton();
-        self.hideLoading();
+        setTimeout ( function(){
+          self.insertPlayButton();
+          self.hideLoading();
+        }, 3000 );
       };
     });
   };
@@ -515,3 +503,31 @@ function parallelPlayer(objName, clipList1, clipList2){
   
 } // class parallelPlayer
 
+// only for testing
+function testLoad (vpIdsStr) {
+  console.log("TEST LOAD");
+  document.addEventListener("DOMContentLoaded", function () {
+    var clipList1 = [
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_01.webm", in: 30,  out: 40},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_02.webm", in: 20,  out: 30},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_03.webm", in: 10,  out: 20},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_05.webm", in: 30,  out: 40},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_07.webm", in: 20,  out: 30},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_09.webm", in: 10,  out: 20},                                                              
+    ];                                              
+    var clipList2 = [                               
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_04.webm", in: 10,  out: 20}, 
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_11.webm", in: 20,  out: 30},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_05.webm", in: 30,  out: 40},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_03.webm", in: 10,  out: 20},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_09.webm", in: 20,  out: 30},
+      { src: "http://doc.gold.ac.uk/~ma101pvk/weporter/jubilee/jubilee_01.webm", in: 30,  out: 40},
+    ];
+    
+    // console.log("CL1: ", clipList1, "CL2: ", clipList2);
+    player = new parallelPlayer(clipList1, clipList2);
+    player.setVpIds(vpIdsStr);
+    player.setRecurring(true);
+        
+  }, false); // DOM content loaded
+}
