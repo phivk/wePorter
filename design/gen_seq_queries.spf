@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>tutorial</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>1349507087669179783</string>
+			<key>name</key>
+			<string>Mamp</string>
+			<key>port</key>
+			<integer>3306</integer>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 2293}, {563, 723}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>-- 12,133,200;
+
+-- select src's in seq
+(select srcVideo from `Video_Parts`
+Where vpId in (12, 133, 200));
+
+-- horizontal check selection
+select vpId
+from `Video_Parts`
+Where srcVideo not in
+(select srcVideo from `Video_Parts`
+Where vpId in (12, 133, 200));
+
+-- select horizontal Selection with minCounts
+select vpId from
+(
+select vpId
+from `Video_Parts`
+Where srcVideo not in
+(select srcVideo from `Video_Parts`
+Where vpId in (12, 133, 200))
+) as hSel
+where
+vpId in 
+(
+Select vpId from `Video_Part_Counts`
+where vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`)
+);
+
+-- select vp with minCount
+Select * from `Video_Part_Counts`
+where vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`);
+
+-- minCount int
+SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`;
+
+-- minSelection2 for empty seq2: all vpId's:
+-- having different src than selected1 (15)
+-- where count = minCount
+select * FROM
+(
+SELECT vpId
+        FROM `Video_Parts`
+        WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId = 15)
+)as nonSelectedSrc
+WHERE;
+
+-- nonSelectedSrc
+
+SELECT vpId
+        FROM `Video_Parts`
+        WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId = 15)
+;
+
+-- nonSelectedSrc joined w counts
+select `Video_Part_Counts`.vpId, vpcount
+FROM `Video_Part_Counts`
+RIGHT JOIN 
+(SELECT vpId
+        FROM `Video_Parts`
+        WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId = 15)
+) as nonSelectedSrc
+ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId;
+
+-- for seq2:
+-- 1 get selected
+-- 2 get minCount of nonSelectedSrc
+SELECT MIN(nonSelSrcCounts.vpcount) as minCount FROM
+(
+	select `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(SELECT vpId
+	        FROM `Video_Parts`
+	        WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	        WHERE vpId = 15)
+	) as nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) as nonSelSrcCounts
+;
+
+-- 3 select vpId's from nonSelectedSrc where vpcount = minCount
+select vpId FROM
+(
+	select `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) as nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) as nonSelectedSrcCounts
+WHERE vpcount = 1
+;
+
+
+
+
+-- minCount
+Select * from `Video_Part_Counts`
+where vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`);
+
+
+(
+SELECT * FROM `Video_Part_Counts` WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`)
+) as minSelection
+where `vpId` not in
+;
+
+
+-- select vpId's w same src than selcted (15)
+(
+SELECT vpId
+        FROM `Video_Parts`
+        WHERE `srcVideo` = (SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId = 15)
+);
+
+-- selected1, e.g. 15;
+-- now select vpId with different srcVideo than selected1
+select vpId
+FROM `Video_Parts`
+WHERE `srcVideo` != (select srcVideo from `Video_Parts`
+where vpId = 15);
+
+-- vpId with SAME src
+select vpId
+FROM `Video_Parts`
+WHERE `srcVideo` != (select srcVideo from `Video_Parts`
+where vpId = 15);
+
+
+
+
+Select vpId from
+(
+select vpId from
+(
+select vpId
+from `Video_Parts`
+Where srcVideo not in
+(select srcVideo from `Video_Parts`
+Where vpId in (12, 133, 200))
+) as hSel
+where
+vpId in 
+(
+Select vpId from `Video_Part_Counts`
+where vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`)
+)
+) as hMinSelection
+WHERE vpId not in 
+(select vpId
+FROM `Video_Parts`
+WHERE `srcVideo` = (select srcVideo from `Video_Parts`
+where vpId = 30))
+;
+
+-- add this to exclude vp with src same at vpId 15
+WHERE vpId not in 
+(select vpId
+FROM `Video_Parts`
+WHERE `srcVideo` = (select srcVideo from `Video_Parts`
+where vpId = 30));
+
+
+
+update `Video_Part_Counts`
+set vpcount=0
+where vpId = 1;
+
+
+-- test queries
+
+
+update `Video_Part_Counts`
+set vpcount=0
+where vpId between 0 and 225;
+
+-- Q2 for empty seq2
+-- edit to include everything from VP
+SELECT vpId, srcVideo, tcIn, tcOut FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1
+;
+
+-- Q2 for NON-empty seq2
+-- get minCount
+SELECT MIN(hvSelectionCounts.vpcount) AS minCount FROM
+      (
+      	SELECT `Video_Part_Counts`.vpId, vpcount
+      	FROM `Video_Part_Counts`
+      	RIGHT JOIN 
+      	(
+      		SELECT vpId
+      		FROM `Video_Parts`
+      		WHERE srcVideo not IN
+      		(
+      		  SELECT srcVideo FROM `Video_Parts`
+      		  WHERE vpId IN (200)
+      		)
+      		AND
+      		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 47)
+      	) AS nonSelectedSrc
+      	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+      ) AS hvSelectionCounts
+      ;
+
+SELECT vpId, srcVideo, tcIn, tcOut FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 3
+;
+
+-- Q1 for empty seq1
+-- original Q1
+SELECT vpId FROM `Video_Part_Counts` WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`);
+
+-- edit to include all columns from Video_Parts
+SELECT `Video_Parts`.vpId, `Video_Parts`.srcVideo, `Video_Parts`.tcIn, `Video_Parts`.tcOut
+FROM `Video_Part_Counts`
+LEFT JOIN `Video_Parts`
+ON `Video_Part_Counts`.vpId = `Video_Parts`.`vpId`
+WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`);
+
+-- current Q1: needs to have all info from Video_Parts
+SELECT * from
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+			SELECT srcVideo FROM `Video_Parts`
+	        WHERE vpId IN (1,222)
+		)
+	) as hSelection
+	ON `Video_Part_Counts`.vpId = hSelection.vpId
+) as hSelectionCounts
+WHERE vpcount = 2;
+
+-- Q1: all columns for vpId's in hSelection
+SELECT Video_Part_Counts.vpId, srcVideo, tcIn, tcOut
+FROM `Video_Part_Counts`
+RIGHT JOIN
+(
+	SELECT *
+	FROM `Video_Parts`
+	WHERE srcVideo not IN
+	(
+		SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId IN (1,222)
+	)
+) as hSelection
+ON `Video_Part_Counts`.vpId = hSelection.vpId
+WHERE vpcount = 2;
+
+
+-- check counts and sources
+SELECT * FROM `Video_Part_Counts`
+INNER JOIN `Video_Parts`
+ON `Video_Parts`.`vpId`=`Video_Part_Counts`.vpId;
+
+-- add one to count of selected vpId (15)
+UPDATE `Video_Part_Counts` 
+SET vpcount = vpcount + 1 
+WHERE vpId = 15;
+
+-- seq2 has elems:
+-- selected1 = 100
+-- select hvSelection
+-- get minCount(hvSelection)
+-- get vpId's from hvSelection where vpcount = minCount
+
+SELECT vpId FROM
+(
+  SELECT vpId FROM
+  (
+    SELECT vpId
+    FROM `Video_Parts`
+    WHERE srcVideo not IN
+    (
+      SELECT srcVideo FROM `Video_Parts`
+      WHERE vpId IN (1,23,46)
+    )
+  ) AS hSel
+  WHERE
+  vpId IN 
+  (
+    SELECT vpId FROM `Video_Part_Counts`
+    WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`)
+  )      
+) AS hMinSelection
+WHERE vpId not IN
+(
+  SELECT vpId
+  FROM `Video_Parts`
+  WHERE `srcVideo` = (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 100)
+);
+
+-- hCheck AND vCheck : hv Selection
+SELECT vpId
+FROM `Video_Parts`
+WHERE srcVideo not IN
+(
+  SELECT srcVideo FROM `Video_Parts`
+  WHERE vpId IN (1,23,46)
+)
+AND
+srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 100)
+;
+
+-- get minCount from hvSelection
+SELECT MIN(hvSelection.vpcount);
+
+-- for seq2:
+-- hvSelection, TODO join with counts, then get min, then select minCount(hvSelection)
+
+-- 1. get minCount(hvSelection) (0)
+SELECT MIN(hvSelectionCounts.vpcount) AS minCount FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,23,46)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 100)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelectionCounts
+;
+
+-- 2. select vpId's from hvSelection where vpcount = minCount (0)
+SELECT vpId FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,23,46)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 100)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 0
+;
+
+
+-- seq1 noElem: all vpIds with minCount
+SELECT vpId FROM `Video_Part_Counts` WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`);
+
+-- get minCount(hSelection) (1)
+SELECT MIN(vpcount) as minCount FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+			SELECT srcVideo FROM `Video_Parts`
+	        WHERE vpId IN (1,23,46)
+		)
+	) as hSelection
+	ON `Video_Part_Counts`.vpId = hSelection.vpId
+) as hSelectionCounts;
+
+-- select vpId's from hSelection where vpcount = minCount
+SELECT vpId from
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+			SELECT srcVideo FROM `Video_Parts`
+	        WHERE vpId IN (1,23,46)
+		)
+	) as hSelection
+	ON `Video_Part_Counts`.vpId = hSelection.vpId
+) as hSelectionCounts
+WHERE vpcount = 1;
+
+-- minSelection1
+SELECT vpId FROM
+(
+	SELECT vpId
+	FROM `Video_Parts`
+	WHERE srcVideo not IN
+	(
+		SELECT srcVideo FROM `Video_Parts`
+        WHERE vpId IN (1,23,46)
+	)
+) AS hSel
+WHERE
+vpId IN 
+(
+	SELECT vpId FROM `Video_Part_Counts`
+	WHERE vpcount = (SELECT MIN(vpcount) AS minCount FROM `Video_Part_Counts`)
+);</string>
+			<key>table</key>
+			<string>Video_Parts</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>SELECT vpId, srcVideo, tcIn, tcOut FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 3</string>
+		<string>-- Q2 for NON-empty seq2
+-- get minCount
+SELECT MIN(hvSelectionCounts.vpcount) AS minCount FROM
+      (
+      	SELECT `Video_Part_Counts`.vpId, vpcount
+      	FROM `Video_Part_Counts`
+      	RIGHT JOIN 
+      	(
+      		SELECT vpId
+      		FROM `Video_Parts`
+      		WHERE srcVideo not IN
+      		(
+      		  SELECT srcVideo FROM `Video_Parts`
+      		  WHERE vpId IN (200)
+      		)
+      		AND
+      		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 47)
+      	) AS nonSelectedSrc
+      	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+      ) AS hvSelectionCounts</string>
+		<string>-- Q2 for NON-empty seq2
+-- get minCount
+SELECT MIN(hvSelectionCounts.vpcount) AS minCount FROM
+      (
+      	SELECT `Video_Part_Counts`.vpId, vpcount
+      	FROM `Video_Part_Counts`
+      	RIGHT JOIN 
+      	(
+      		SELECT vpId
+      		FROM `Video_Parts`
+      		WHERE srcVideo not IN
+      		(
+      		  SELECT srcVideo FROM `Video_Parts`
+      		  WHERE vpId IN $seq2Str
+      		)
+      		AND
+      		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = $selectedVPId1)
+      	) AS nonSelectedSrc
+      	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+      ) AS hvSelectionCounts</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT vpId, srcVideo, tcIn, tcOut FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT * FROM
+(
+	SELECT *
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT vpId FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = 33)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT vpId FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN (1,222)
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = $selected1)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = 2</string>
+		<string>-- Q2 for NON-empty seq2
+SELECT vpId FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT vpId
+		FROM `Video_Parts`
+		WHERE srcVideo not IN
+		(
+		  SELECT srcVideo FROM `Video_Parts`
+		  WHERE vpId IN $seq2Str
+		)
+		AND
+		srcVideo != (SELECT srcVideo FROM `Video_Parts` WHERE vpId = $selected1)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS hvSelection
+WHERE vpcount = $minCount2</string>
+		<string>-- edit to include everything from VP
+SELECT vpId, srcVideo, tcIn, tcOut FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT vpId, srcVideo, tcIn FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT vpId, srcVideo FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT vpId FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.srcVideo, `nonSelectedSrc`.tcIn, `nonSelectedSrc`.tcOut
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT * FROM
+(
+	SELECT *
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT * FROM
+(
+	SELECT `nonSelectedSrc`.*
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`.*
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+		<string>-- edit to include everything from VP
+SELECT * FROM
+(
+	SELECT `Video_Part_Counts`.vpId, vpcount, `nonSelectedSrc`
+	FROM `Video_Part_Counts`
+	RIGHT JOIN 
+	(
+		SELECT *
+	    FROM `Video_Parts`
+		WHERE `srcVideo` != (SELECT srcVideo FROM `Video_Parts`
+	    	WHERE vpId = 15)
+	) AS nonSelectedSrc
+	ON `Video_Part_Counts`.vpId = nonSelectedSrc.vpId
+) AS nonSelectedSrcCounts
+WHERE vpcount = 1</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.25</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

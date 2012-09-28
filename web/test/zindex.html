@@ -1,0 +1,25 @@
+<html>
+<head>
+<style>
+
+h4{ position: relative; 
+top: 30px;
+left: 50px;
+z-index: 2;
+background-color: #336699;}
+
+p { position: relative; 
+z-index: 1; 
+background-color: #FFCCCC;} 
+
+</style>
+</head>
+<body>
+<h4>Header Z-Index = 2</h4>
+<p>You probably can't read this part, so I will fill it in with useless text for 
+the time being.  This paragraph has a z-index of 1, which is less than
+the header.  As you can see, the header has been moved down, using positioning, and is
+now resting on top of this paragraph.  If we had not defined the z-index, by default the paragraph
+would have been on top of the header because it appears later in our HTML code.</p>
+</body>
+</html>

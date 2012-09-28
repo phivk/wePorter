@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>tutorial</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>name</key>
+			<string>root@127.0.0.1</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {578, 723}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>INSERT INTO `Videos`
+	(`vId`, `src`, `title`, `length`)
+VALUES(
+	1,
+	'video1.mp4',
+	'first title',
+	186
+);
+
+INSERT INTO `Videos`
+	(`vId`, `src`, `title`, `length`)
+VALUES(
+	2,
+	'video1.mp4',
+	'second title',
+	123
+);
+
+SELECT vId, src, title
+from `Videos`
+order by title DESC;
+
+Drop table Videos2;
+
+DELETE FROM Videos;
+
+drop table `Sequence_Pair_Ratings_6Parts`;
+
+CREATE TABLE Sequence_Pair_Ratings_6Parts
+(
+  sprId int auto_increment,
+  seq_r1_1 float NOT NULL,
+  seq_r1_2 float NOT NULL,
+  seq_r1_3 float NOT NULL,
+  seq_r1_4 float NOT NULL,
+  seq_r1_5 float NOT NULL,
+  seq_r1_6 float NOT NULL,
+  seq_r2_1 float NOT NULL,
+  seq_r2_2 float NOT NULL,
+  seq_r2_3 float NOT NULL,
+  seq_r2_4 float NOT NULL,
+  seq_r2_5 float NOT NULL,
+  seq_r2_6 float NOT NULL,
+  PRIMARY KEY (sprId)
+);
+
+drop table `Sequence_Pair_Ratings_6Parts`;
+
+CREATE TABLE Sequence_Pair_Ratings_6Parts
+(
+  sprId int auto_increment,
+  seq_r1_1 float NOT NULL,
+  seq_r1_2 float NOT NULL,
+  seq_r1_3 float NOT NULL,
+  seq_r1_4 float NOT NULL,
+  seq_r1_5 float NOT NULL,
+  seq_r1_6 float NOT NULL,
+  seq_r2_1 float NOT NULL,
+  seq_r2_2 float NOT NULL,
+  seq_r2_3 float NOT NULL,
+  seq_r2_4 float NOT NULL,
+  seq_r2_5 float NOT NULL,
+  seq_r2_6 float NOT NULL,
+  PRIMARY KEY (sprId)
+);
+
+
+
+CREATE TABLE Questionnaires												
+(
+  qId int auto_increment,
+  created DATETIME NOT NULL,
+  formName varchar(50) NOT NULL,
+  formEmail varchar(50) NOT NULL,
+  formAge int NOT NULL,
+  formHear int NOT NULL,
+  formAsked int NOT NULL,
+  formFrequency int NOT NULL,
+  formDuration int NOT NULL,
+  formNews int NOT NULL,
+  formRecord int NOT NULL,
+  formUpload int NOT NULL,
+  formRemix int NOT NULL,
+  formExperience int NOT NULL,
+  formComments varchar(500),
+  PRIMARY KEY (qId)
+);
+
+CREATE INDEX spIndex
+ON `Sequence_Pair_6Parts` (spId);
+
+CREATE INDEX sprIndex
+ON `Sequence_Pair_Ratings_6Parts` (sprId);
+
+CREATE INDEX qIndex
+ON `Questionnaires` (qId);
+
+drop table Interactions;
+
+CREATE TABLE Interactions
+(
+  iId int,
+  created DATETIME NOT NULL,
+  sequence_pair int,
+  sequence_pair_ratings int,
+  questionnaire int,
+  PRIMARY KEY (iId),
+--   index (fk_test1),
+  CONSTRAINT fk_seq FOREIGN KEY (sequence_pair) REFERENCES Sequence_Pair_6Parts(spId),
+  CONSTRAINT fk_seq_r FOREIGN KEY (sequence_pair_ratings) REFERENCES Sequence_Pair_Ratings_6Parts(sprId),
+  CONSTRAINT fk_questionnaire FOREIGN KEY (questionnaire) REFERENCES Questionnaires(qId)
+);
+
+drop table Video_Part_Counts;
+
+CREATE TABLE Video_Part_Counts
+(
+	vpId int NOT NULL,
+	vpcount int NOT NULL,
+	primary key (vpId),
+	CONSTRAINT fk_vp FOREIGN KEY (vpId) REFERENCES `Video_Parts`(vpId)
+);</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>CREATE TABLE Video_Part_Counts
+(
+	vpId int NOT NULL,
+	vpcount int NOT NULL,
+	primary key (vpId),
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+	CONSTRAINT fk_vp FOREIGN KEY (vpId) REFERENCES `Video_Parts`(vpId)
+)</string>
+		<string>drop table vpc</string>
+		<string>CREATE TABLE vpc
+(
+	vpId int NOT NULL,
+	vpcount int NOT NULL,
+	primary key (vpId),
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+	CONSTRAINT fk_vp FOREIGN KEY (vpId) REFERENCES `Video_Parts`(vpId)
+)</string>
+		<string>create table vpc(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId),
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+	constraint fk_vp foreign key (vpId) references `Video_Parts`(vpId)
+)</string>
+		<string>drop table vpc3</string>
+		<string>drop table vpc2</string>
+		<string>drop table vpc1</string>
+		<string>create table vpc3(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId),
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+	constraint fk_vp foreign key (vpId) references `Video_Parts`(vpId)
+)</string>
+		<string>create table vpc2(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId),
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+	constraint fk_vp foreign key (vpId) references `Video_Parts`(vpId)
+)</string>
+		<string>create table vpc2(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId)
+-- 	foreign key (vpId) references `Video_Parts`(vpId)
+)</string>
+		<string>create table vpc(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId),
+	foreign key (vpId) references `Video_Parts`(vpId)
+)</string>
+		<string>create table vpc(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId)
+)</string>
+		<string>create table vpc2(
+	vpId int not null,
+	vpcount int not null,
+	primary key (vpId),
+)</string>
+		<string>CREATE TABLE Video_Part_Counts	
+(
+  vpId int,
+  vpCount int,
+  PRIMARY KEY (vpcId),
+  CONSTRAINT fk_vp FOREIGN KEY (vpId)
+    REFERENCES Video_Parts(vpId)
+)</string>
+		<string>create table vpc(
+	vpId int not null,
+	vpcount int not null,
+	primary key vpId
+)</string>
+		<string>create table vpc(
+	vpId int not null,
+	vpcount int not null
+)</string>
+		<string>CREATE TABLE Video_Part_Counts(
+  vpId int NOT NULL,
+  vpCount int NOT NULL,
+  PRIMARY KEY vpId
+)</string>
+		<string>CREATE TABLE Video_Part_Counts	
+(
+  vpId int NOT NULL,
+  vpCount int NOT NULL,
+  PRIMARY KEY vpId
+)</string>
+		<string>CREATE TABLE Video_Part_Counts	
+(
+  vpId int NOT NULL,
+  vpCount int NOT NULL,
+  PRIMARY KEY vpId
+--   CONSTRAINT fk_vp FOREIGN KEY vpId REFERENCES Video_Parts(vpId)
+)</string>
+		<string>CREATE TABLE Video_Part_Counts	
+(
+  vpId int NOT NULL,
+  vpCount int NOT NULL,
+  PRIMARY KEY vpId
+--   CONSTRAINT fk_vp FOREIGN KEY (vpId) REFERENCES Video_Parts(vpId)
+)</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.25</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

@@ -1,0 +1,124 @@
+* {
+  /* draw Borders for DEBUG */
+/*  border: 1px dashed gray;*/
+	font-family: Helvetica, sans-serifs;	
+}
+
+a{
+  text-decoration:none;
+}
+
+#interactionWrapper{
+  position: relative;
+}
+
+.sequenceWrapper{
+  overflow: hidden;
+}
+
+.playerWrapper {
+    position: relative;
+    width: 360px;
+    height: 270px;
+/*    border: 2px dashed blue;*/
+    float: left
+}
+
+.dataWrapper{
+  float: left;
+}
+
+
+#playButton{
+  position: absolute;
+  top: 47%;
+  left: 150px;
+}
+
+/*DEBUG*/
+/*.videoBox{
+  width: 360px;
+}
+*/
+.videoBox *{
+  width: 360px;
+  height: 270px;
+}
+
+.counter {
+  background:orange;
+}
+
+.focusBlock, .focusBlock-js {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+		height: 100%;
+    background: white;
+    opacity: 0.8;
+    text-align: center
+}
+.playerWrapper:hover .focusBlock {
+    display: none;
+}​
+
+#header {
+  background:#666666;
+  position:relative;  
+}
+
+.shadow {
+	-webkit-box-shadow: 0 8px 6px -4px black;
+	   -moz-box-shadow: 0 8px 6px -4px black;
+	        box-shadow: 0 8px 6px -4px black;
+}
+
+#logo{
+  padding:10px;
+  height:70px;
+  position:relative;
+}
+
+#nav {
+  position:relative;
+  right:0;
+}
+
+#nav ul {
+  background:black;
+  list-style-type:none;
+  position:relative;
+  right:0;
+}
+
+#nav ul li{
+  display:inline-block;
+  padding:5px;
+}
+
+#nav ul li:hover{
+  background:silver;
+}
+
+#nav ul li a{
+  color:white; 
+}
+
+#footer{
+  background:black;
+  /*TODO Position properly*/
+/*  display: none;*/
+}
+
+#footer ul{
+  list-style-type:none;
+}
+
+#footer ul li{
+  display:inline-block;
+  padding:5px;
+  color:white;
+  
+}

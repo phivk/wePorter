@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<style type="text/css">
+			.thumb {
+			    position: relative;
+			    width: 150px;
+			    height: 100px;
+			    border: 2px dashed #444;
+			    margin: 10px;
+			    float: left
+			}
+			.text, .text-js {
+			    display: none;
+			    position: absolute;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    background: #999;
+			    background: rgba(0,0,0,0.3);
+			    text-align: center
+			}
+			.thumb:hover .text {
+			    display: block
+			}​
+		</style>
+		<script src="../website/js/jquery-1.7.2.js"></script>
+		<script type="text/javascript">
+			$('.text').hide().removeClass('text').addClass('text-js');
+
+			$('.thumb').hover(function(){
+			    $(this).find('.text-js').fadeToggle();
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div class="thumb">
+		    <img src="http://dummyimage.com/150x100/ccc/fff" />
+		    <div class="text">text text text text text text text</div>
+		</div>
+
+		<div class="thumb">
+		    <img src="http://dummyimage.com/150x100/ccc/fff" />
+		    <div class="text">text text text text text text text</div>
+		</div>
+		
+		
+	</body>
+</html>

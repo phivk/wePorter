@@ -1,0 +1,41 @@
+<!-- constructed html -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    var clipList1 = [ 
+      { src: "content/video/jubilee/jubilee_11.webm", in: 51, out: 60 },
+      { src: "content/video/jubilee/jubilee_12.webm", in: 71, out: 80 },
+      { src: "content/video/jubilee/jubilee_09.webm", in: 61, out: 70 },
+      { src: "content/video/jubilee/jubilee_01.webm", in: 161, out: 170 },
+      { src: "content/video/jubilee/jubilee_03.webm", in: 221, out: 230 },
+      { src: "content/video/jubilee/jubilee_10.webm", in: 131, out: 140 }, 
+    ]; 
+    var clipList2 = [ 
+      { src: "content/video/jubilee/jubilee_12.webm", in: 301, out: 310 },
+      { src: "content/video/jubilee/jubilee_11.webm", in: 161, out: 170 },
+      { src: "content/video/jubilee/jubilee_03.webm", in: 111, out: 120 },
+      { src: "content/video/jubilee/jubilee_10.webm", in: 21, out: 30 },
+      { src: "content/video/jubilee/jubilee_01.webm", in: 101, out: 110 },
+      { src: "content/video/jubilee/jubilee_09.webm", in: 31, out: 40 }, 
+    ];
+    player = new parallelPlayer(clipList1, clipList2); 
+  }, false); 
+</script> 
+
+<!-- copied html -->
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    var clipList1 = [
+      { src: "content/video/video1.webm", in: 1,  out: 5 }, 
+      { src: "content/video/video2.webm", in: 6 , out: 10 },       
+      { src: "content/video/video3.webm", in: 15, out: 16 }
+    ];      
+    var clipList2 = [       
+      { src: "content/video/video2.webm", in: 1, out: 5},       
+      { src: "content/video/video3.webm", in: 6, out: 10},       
+      { src: "content/video/video1.webm", in: 15, out: 16 }
+    ];
+    test();
+    // player = new parallelPlayer(clipList1, clipList2);
+
+  }, false); // DOM content loaded
+</script>'

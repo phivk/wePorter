@@ -1,0 +1,36 @@
+ <!doctype html>
+    <html>
+      <head>
+        <script type = "text/javascript" src="js/popcorn-complete.js"></script>
+        <script>
+        	// ensure the web page (DOM) has loaded
+	        document.addEventListener("DOMContentLoaded", function () {
+        
+	        	// Create a popcorn instance by calling Popcorn("#id-of-my-video")
+		        var pop = Popcorn("#ourvideo");
+
+						//Add the map command
+						pop.googlemap({
+							start: 2, // Our start time in seconds
+							end: 5, // Our end time in seconds
+							type: "STREETVIEW", //
+							target: "googlemap",  // The id of our target DoM element
+							location: "New York", //  The location we want our map to display at
+							zoom: 1 // Setting the zoom that we would like
+						});
+
+	          // play the video right away
+	          pop.play();
+
+          }, false);
+        </script>
+      </head>
+      <body>
+       <video height="180" width="300" id="ourvideo">
+          <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.mp4"></source>
+          <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv"></source>
+          <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.webm"></source>
+        </video>
+        <div id="googlemap"></div>
+      </body>
+    </html>

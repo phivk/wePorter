@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+  
+<button>fadeToggle p1</button>
+<button>fadeToggle p2</button>
+<p>This paragraph has a slow, linear fade.</p>
+
+<p>This paragraph has a fast animation.</p>
+<div id="log"></div>
+
+<script>
+$("button:first").click(function() {
+  $("p:first").fadeToggle("slow", "linear");
+});
+$("button:last").click(function () {
+  $("p:last").fadeToggle("fast", function () {
+    $("#log").append("<div>finished</div>");
+  });
+});
+</script>
+
+</body>
+</html>

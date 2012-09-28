@@ -1,0 +1,44 @@
+<!-- based on example: http://popcornjs.org/popcorn-docs/modules/ -->
+<!doctype html>
+<html>
+  <head>
+		<!-- include popcorn.js -->
+		<script src="popcorn-complete_1.3.js"></script>
+    <script>
+      // ensure the web page (DOM) has loaded
+      document.addEventListener("DOMContentLoaded", function () {
+				// create our sequence
+				clipList = [
+            // {src: "video/video1.mp4", in: 12, out: 16},
+            {src: "video/jubilee_12.webm", in: 104, out: 108},
+            {src: "video/jubilee_09.webm", in: 11, out: 20},
+        ];
+				var sequence = Popcorn.sequence("container-id", clipList);
+
+				// play popcorn
+				sequence.play();
+				
+				// get popcorn object of first video
+				console.log( sequence.eq( 0 ) );
+
+      }, false);
+    </script>
+  </head>
+  <body>
+    
+    <video height="180" width="300" id="ourvideo" controls>
+      <source src="./video/jubilee_12.webm">
+    </video>
+  		            
+    		                
+		
+<!-- <video height="180" width="300" id="ourvideo" controls>
+                  <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.mp4">
+                  <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.ogv">
+                  <source src="http://videos.mozilla.org/serv/webmademovies/popcornplug.webm">
+                </video> -->
+    <!-- <div id="footnotediv"></div> -->
+		<div id="container-id"></div>
+		<!-- <div id="foo"></div> -->​
+  </body>
+</html>

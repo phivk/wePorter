@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>tutorial</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>1349507087669179783</string>
+			<key>name</key>
+			<string>Mamp</string>
+			<key>port</key>
+			<integer>3306</integer>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {578, 708}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>-- insert seqVpIds
+insert into `Sequence_Pair_6Parts` (seq1_1,seq1_2,seq1_3,seq1_4,seq1_5,seq1_6,seq2_1,seq2_2,seq2_3,seq2_4,seq2_5,seq2_6)
+VALUES (81,221,17,53,84,140,95,139,63,82,108,201);
+
+-- insert seqRatings
+insert into `Sequence_Pair_Ratings_6Parts` (seq_r1_1,seq_r1_2,seq_r1_3,seq_r1_4,seq_r1_5,seq_r1_6,seq_r2_1,seq_r2_2,seq_r2_3,seq_r2_4,seq_r2_5,seq_r2_6)
+VALUES (1,2,3,4,5,6,7,8,9,0,9,8);
+
+insert into Interactions (created,sequence_pair,sequence_pair_ratings)
+VALUES (NOW(), $seq_pair_id, $seq_ratings_Id);
+
+insert into InteractionsDirect (`created`, `sequence_pair`, `sequence_pair_ratings`)
+VALUES (NOW(), "81,221,17,53,84,140,95,139,63,82,108,201", "1,2,3,4,5,6,7,8,9,0,9,8");
+
+
+-- create new Interactions table to store seqVpIds and seqRatings directly as strings
+create Table InteractionsDirect
+(
+  `iId` int(11) NOT NULL AUTO_INCREMENT,
+  `created` datetime NOT NULL,
+  `sequence_pair` varchar(255) DEFAULT NULL,
+  `sequence_pair_ratings` varchar(255) DEFAULT NULL,
+  `questionnaire` int(11) DEFAULT NULL,
+  PRIMARY KEY (`iId`),
+  KEY `fk_questionnaireDirect` (`questionnaire`),
+  CONSTRAINT `fk_questionnaireDirect` FOREIGN KEY (`questionnaire`) REFERENCES `Questionnaires` (`qId`)
+);
+
+drop table InteractionsDirect;
+
+select spId from `Sequence_Pair_6Parts`
+WHERE
+seq1_1 = 81
+AND      
+seq1_2 = 221
+AND      
+seq1_3 = 17
+AND      
+seq1_4 = 53
+AND      
+seq1_5 = 84
+AND      
+seq1_6 = 140
+AND      
+seq2_1 = 95
+AND      
+seq2_2 = 139
+AND      
+seq2_3 = 63
+AND      
+seq2_4 = 82
+AND      
+seq2_5 = 108
+AND      
+seq2_6   201;
+
+</string>
+			<key>table</key>
+			<string>InteractionsDirect</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>delete from Videos
+WHERE vId = 12</string>
+		<string>-- backup Video table
+
+
+INSERT INTO Videos_Backup
+SELECT * FROM Videos</string>
+		<string>-- backup Video table
+
+
+Select * 
+INTO `VideosBackup`
+from Videos</string>
+		<string>-- backup Video table
+
+
+Select * 
+into `VideosBackup`
+from Videos</string>
+		<string>-- backup Video table
+
+
+Select * 
+into `Videos_Backup`
+from Videos</string>
+		<string>-- creat Video backup table
+CREATE TABLE `Videos_Backup` (
+  `vId` int(11) NOT NULL AUTO_INCREMENT,
+  `src` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `length` int(11) NOT NULL,
+  PRIMARY KEY (`vId`),
+  UNIQUE KEY `uc_Video` (`vId`,`src`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1</string>
+		<string>Videos_Backup</string>
+		<string>-- backup Video table
+Select * 
+into Videos_Backup
+from Videos</string>
+		<string>-- insert formdata into Questionnaires
+INSERT INTO Questionnaires (`created`,`formName`,`formEmail`,`formAge`,`formHear`,`formFrequency`,`formDuration`,`formNews`,`formRecord`,`formUpload`,`formRemix`,`formExperience`,`formComments`)
+          VALUES
+          (
+          NOW(),
+          'name',
+          'email@pro.ne',
+          21,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          '')</string>
+		<string>created</string>
+		<string>-- insert formdata into Questionnaires
+INSERT INTO Questionnaires (created,`formName`,`formEmail`,`formAge`,`formHear`,`formFrequency`,`formDuration`,`formNews`,`formRecord`,`formUpload`,`formRemix`,`formExperience`,`formComments`)
+          VALUES
+          (
+          NOW(),
+          'name',
+          'email@pro.ne',
+          21,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          '')</string>
+		<string>ALTER TABLE `Questionnaires` DROP COLUMN `formAsked`</string>
+		<string>drop column formAsked from `Questionnaires`</string>
+		<string>delete from table InteractionsDirect</string>
+		<string>insert into `Questionnaires` (`created`, `formName`, `formEmail`, `formAge`, `formHear`, `formAsked`, `formFrequency`, `formDuration`, `formNews`, `formRecord`, `formUpload`, `formRemix`, `formExperience`)
+output inserted.pk
+VALUES (NOW(),"Phill","phill@chill.me",2,1,1,1,1,1,1,1,1,1)</string>
+		<string>select scope_identity()</string>
+		<string>insert into `Questionnaires` (`created`, `formName`, `formEmail`, `formAge`, `formHear`, `formAsked`, `formFrequency`, `formDuration`, `formNews`, `formRecord`, `formUpload`, `formRemix`, `formExperience`)
+VALUES (NOW(),"Phill","phill@chill.me",2,1,1,1,1,1,1,1,1,1)</string>
+		<string>insert into `Questionnaires` (`created`, `formName`, `formEmail`, `formAge`, `formHear`, `formAsked`, `formFrequency`, `formDuration`, `formNews`, `formRecord`, `formUpload`, `formRemix`, `formExperience`)
+VALUES (NOW(),"Phill","phill@chill.me",1,1,1,1,1,1,1,1,1,1)</string>
+		<string>phill@chill.me</string>
+		<string>insert into `Questionnaires` (`created`, `formName`, `formEmail`, `formAge`, `formHear`, `formAsked`, `formFrequency`, `formDuration`, `formNews`, `formRecord`, `formUpload`, `formRemix`, `formExperience`)
+VALUES (NOW(),Phill,phill@chill.me,1,1,1,1,1,1,1,1,1,1)</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.25</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

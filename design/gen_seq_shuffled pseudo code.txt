@@ -1,0 +1,36 @@
+Pseudo Code generate Sequences Random Shuffled
+# fillSeqs
+(seq1, seq2) <- [],[]
+for i <- 0 to n_parts do
+  # select videoParts with different src than the parts already in sequence
+  selection1 <- []
+  selection2 <- []
+  for all vp in videoParts do:    
+    if vp.src not in seq1:
+      add vp to selection1
+    if vp.src not in seq2:
+      add vp to selection2            
+
+  # seq1: select videoParts that have minimal count
+  minSelection11 <- []
+  minCount1 <- min(count) from selection1
+  for all vp in selection1:
+    if vp.count == minCount1:
+      add vp to minSelection1
+  selected1 <- pick random from minSelection1
+  add selected1 to seq1
+
+  # seq2: filter videoParts with different src than selected for seq1
+  selection2V = []
+  for vp in selection2:
+    if vp.src != selected1.src:
+      add vp to selection2V
+  # select videoParts that have minimal count
+  minSelection2 <- []
+  minCount2 <- min(count) from selection2
+  for all vp in selection2:
+    if vp.count == minCount2:
+      add vp to minSelection2
+  selected2 <- pick random from minSelection2
+  add selected2 to seq2
+shuffle in unison(seq1, seq2)
