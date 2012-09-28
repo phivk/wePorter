@@ -122,45 +122,46 @@ function loadParallelPair() {
       bestParts[85],  //8
       bestParts[102], //9
   	];
-
     console.log("CL1: ", clipList1Good, "CL2: ", clipList2Good);
-    // player = new parallelPlayer(clipList1, clipList2);
     
-    vpIds1Good = [11, 22, 35, 50, 69, 133];
-    vpIds2Good = [44, 58, 72, 122, 85, 102];
-    vpIdsStrGood = vpIds1Good.concat(vpIds2Good).toString();
-    console.log(vpIdsStrGood);
-    // player.setVpIds(vpIdsStrGood);
-    // player.setRecurring(true);
-
-    // bad
-    var clipList1Bad = [
-      worstParts[3  ], //src1
-  		worstParts[39 ], //src3
-  		worstParts[56 ], //src5
-      worstParts[47 ], //src4
-      worstParts[73 ], //src7
-      worstParts[138]  //src11
-  	];
-	  
-    var clipList2Bad = [
-      worstParts[40 ], //3
-  		worstParts[63 ], //5
-  		worstParts[78 ], //7
-      worstParts[142], //11
-      worstParts[48 ], //4
-      worstParts[12 ], //1
-  	];
-
-    console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
-    playerBad = new parallelPlayer(clipList1Bad, clipList2Bad);
+    // var containerIdsGood = [ "sequencePlayer1Left", "sequencePlayer2Left" ];
+    // var playerWrapperIdsGood = [ "playerWrapper1Left", "playerWrapper2Left" ];
+    // var playerGood = new parallelPlayer("playerGood", containerIdsGood, playerWrapperIdsGood, clipList1Good, clipList2Good);
+    playerGood = new parallelPlayer("playerGood", clipList1Good, clipList2Good);
     
-    var vpIds1Bad = [11, 22, 35, 50, 69, 133];
-    var vpIds2Bad = [44, 58, 72, 122, 85, 102];
-    vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
-    console.log(vpIdsStrBad);
-    playerBad.setVpIds(vpIdsStrBad);
-    playerBad.setRecurring(true);
+    var vpIds1Good = [11, 22, 35, 50, 69, 133];
+    var vpIds2Good = [44, 58, 72, 122, 85, 102];
+    var vpIdsStrGood = vpIds1Good.concat(vpIds2Good).toString();
+    playerGood.setVpIds(vpIdsStrGood);
+    playerGood.setRecurring(true);
+
+    //     // bad
+    //     var clipList1Bad = [
+    //       worstParts[3  ], //src1
+    //  worstParts[39 ], //src3
+    //  worstParts[56 ], //src5
+    //       worstParts[47 ], //src4
+    //       worstParts[73 ], //src7
+    //       worstParts[138]  //src11
+    // ];
+    //    
+    //     var clipList2Bad = [
+    //       worstParts[40 ], //3
+    //  worstParts[63 ], //5
+    //  worstParts[78 ], //7
+    //       worstParts[142], //11
+    //       worstParts[48 ], //4
+    //       worstParts[12 ], //1
+    // ];
+    //     
+    //     console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
+    //     var playerBad = new parallelPlayer("playerBad", clipList1Bad, clipList2Bad);
+    //     
+    //     var vpIds1Bad = [11, 22, 35, 50, 69, 133];
+    //     var vpIds2Bad = [44, 58, 72, 122, 85, 102];
+    //     var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
+    //     playerBad.setVpIds(vpIdsStrBad);
+    //     playerBad.setRecurring(true);
     
 
   }, false); // DOM content loaded

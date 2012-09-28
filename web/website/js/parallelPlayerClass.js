@@ -28,9 +28,11 @@ function testLoad (vpIdsStr) {
 }
 
 // Parallel Player class for 2 sequences playing in parallel
-function parallelPlayer(clipList1, clipList2){
+// function parallelPlayer(objName, containerIds, playerWrapperIds, clipList1, clipList2){
+function parallelPlayer(objName, clipList1, clipList2){
   // debug flag
   this.debug = true;
+  this.playerObjName = objName;
   
   // check for equal length of clipLists
   if ( clipList1.length === clipList2.length ){
@@ -40,8 +42,10 @@ function parallelPlayer(clipList1, clipList2){
     console.log("sequences must have same length");
     return false;
   }
-	this.containerIds = [ "sequencePlayer1", "sequencePlayer2" ];
-	this.playerWrapperIds = [ "playerWrapper1", "playerWrapper2" ];
+  this.containerIds = [ "sequencePlayer1", "sequencePlayer2" ];
+  this.playerWrapperIds = [ "playerWrapper1", "playerWrapper2" ];
+  //   this.containerIds = containerIds;
+  // this.playerWrapperIds = playerWrapperIds;
 
 	// TODO jQuery create:
 	//  containerId elements
@@ -75,8 +79,6 @@ function parallelPlayer(clipList1, clipList2){
   this.attachClipEndHandlers = attachClipEndHandlers;
   this.attachFocusHandlers = attachFocusHandlers;
   this.attachCanPlayThroughHandler = attachCanPlayThroughHandler;
-  this.counterOn = counterOn;
-  this.counterOff = counterOff;
   this.clipEndHandler = clipEndHandler;
   this.seqEndHandler = seqEndHandler;
   this.logCount = logCount;
@@ -90,9 +92,9 @@ function parallelPlayer(clipList1, clipList2){
   this.hideLoading = hideLoading;
   this.insertLoading = insertLoading;
   this.seqCounterOn = seqCounterOn;
+  this.counterOff = counterOff;
   this.setEndModal = setEndModal;
   
-
   // execute methods in constructor
   this.insertLoading();
   this.loadSeq(0, this.clipLists[0]);
@@ -374,7 +376,7 @@ function parallelPlayer(clipList1, clipList2){
   
   function seqCounterOn(seqIdx){
     // TODO Fix; ugly ref to player object for now
-    // var playerObjName = "player";
+    // var playerObjName = 'player';
     var playerObjName = this.playerObjName;
     var targetId = this.containerIds[seqIdx];
     
@@ -395,29 +397,30 @@ function parallelPlayer(clipList1, clipList2){
     // trigger next
     timeoutId=setTimeout(playerObjName+'.seqCounterOn(\'' +seqIdx+ '\')',100);
   }
-  
-  function counterOn(targetId){
-    console.log("targetId: ", targetId);
-    // TODO Fix; ugly ref to player object for now
-    var playerObjName = "player";
-    
-    if (this.debug) {
-      // div counter++
-      var counterId = "#" + targetId + "Counter";
-      var curVal = parseInt($(counterId).val(), 10);
-      if (this.bPlaying) {
-        $(counterId).val(curVal+1);
-      };
-    };
-    
-    // var counter++
-    if (this.bPlaying) {
-      this.counters[targetId] += 1;
-    };
-    
-    // trigger next
-    timeoutId=setTimeout(playerObjName+'.counterOn(\'' +targetId+ '\')',100);
-  }
+
+  // DEPRECATED: use seqCounterOn()
+  // function counterOn(targetId){
+  //   console.log("targetId: ", targetId);
+  //   // TODO Fix; ugly ref to player object for now
+  //   var playerObjName = "player";
+  //   
+  //   if (this.debug) {
+  //     // div counter++
+  //     var counterId = "#" + targetId + "Counter";
+  //     var curVal = parseInt($(counterId).val(), 10);
+  //     if (this.bPlaying) {
+  //       $(counterId).val(curVal+1);
+  //     };
+  //   };
+  //   
+  //   // var counter++
+  //   if (this.bPlaying) {
+  //     this.counters[targetId] += 1;
+  //   };
+  //   
+  //   // trigger next
+  //   timeoutId=setTimeout(playerObjName+'.counterOn(\'' +targetId+ '\')',100);
+  // }
 
   function counterOff(){
     clearTimeout(timeoutId);

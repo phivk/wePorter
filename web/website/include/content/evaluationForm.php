@@ -111,19 +111,19 @@
             <div class="six columns">
         
               <!-- parallel player left -->
-              <div id="interactionWrapper" class="panel" onload="resetCount()">
+              <div id="interactionWrapperRight" class="panel" onload="resetCount()">
                 <div class="sequenceWrapper">
-                  <div id='playerWrapper1' class='playerWrapper'>
+                  <div id='playerWrapper1Right' class='playerWrapper'>
                     <div class="focusBlock"></div>
-                    <div id="sequencePlayer1" class="videoBox"></div>
+                    <div id="sequencePlayer1Right" class="videoBox"></div>
                   </div>
                   <div class="data-wrapper">
                   </div>
                 </div>
                 <div class="sequenceWrapper">
-                  <div id='playerWrapper2' class='playerWrapper'>
+                  <div id='playerWrapper2Right' class='playerWrapper'>
                     <div class="focusBlock"></div>
-                    <div id="sequencePlayer2" class="videoBox"></div>
+                    <div id="sequencePlayer2Right" class="videoBox"></div>
                   </div>
                   <div class="data-wrapper">
                   </div>
@@ -170,23 +170,35 @@
               </p>
             </div> <!-- six cols right -->
           </div> <!-- pair3 video row -->
-    
+          
           <!-- preference -->
           <div class="row">
             <div class="twelve columns" style="text-align: center">
               <label>Which of the two videos above has your <strong>preference</strong>?</label>
               <div class="row"> <!-- radio row -->
-                <div class="six columns" style="text-align: center">
+                <div class="four columns" style="text-align: center">
                   <label for="radio3">
                       <input name="radio3" type="radio" id="radio3Left"> Left
                   </label>
                 </div> <!-- six cols radioLeft -->
 
-                <div class="six columns" style="text-align: center">
+                <div class="four columns" style="text-align: center">
                   <label for="radio3">
+                      <input name="radio3" type="radio" id="radio3None"> None
+                  </label>
+                </div> <!-- six cols radioLeft -->
+
+                <div class="four columns" style="text-aligngn: center">
+                  <label for="radio2">
                       <input name="radio3" type="radio" id="radio3Right"> Right
                   </label>
                 </div> <!-- six cols radioRight -->
+
+                <p>
+                 <label><strong>Why?</strong> (Optional)</label>
+                 <textarea name="formComments" rows="1" cols="25"></textarea>
+                </p>
+
               </div> <!-- radio row -->
             </div> <!-- twelve col preference -->         
           </div> <!-- preference -->
