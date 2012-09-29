@@ -88,8 +88,6 @@ var worstParts = {
   142: {src:  srcList[11], in: 371, out: 380} 
 }
 
-// var modal = "#resModal"; 
-
 loadParallelPair();
 
 // loadSeqPair(1, [])
@@ -100,6 +98,57 @@ loadParallelPair();
 // loadVideoPair(7, 58 , 56 );
 // loadVideoPair(8, 69 , 70 );
 // loadVideoPair(9, 133, 142);
+
+function loadSeqPair(n, goodIdList, badIdList) {
+  document.addEventListener("DOMContentLoaded", function () {
+    var clipListGood = [                               
+      bestParts[goodId]
+    ];
+    var clipListBad = [                               
+      worstParts[badId]
+    ];
+    
+    // load good and bad clip left or right based on coin flip
+    if (Math.round(Math.random())) {
+      // heads
+      var containerIdGood = "seq"+n+"left";
+      var containerIdBad = "seq"+n+"right";
+    }
+    else {
+      // tails
+      var containerIdGood = "seq"+n+"right";
+      var containerIdBad  = "seq"+n+"left";
+    }   
+    
+    console.log(clipListBad);
+    console.log(clipListGood);
+    
+    // load last part first (otherwise parts 133, 142 wont load)
+    if (goodId < badId) {
+      var containerId1 = containerIdBad;
+      var clipList1 = clipListBad;
+      var containerId2 = containerIdGood;
+      var clipList2 = clipListGood;
+    }
+    else {
+      var containerId1 = containerIdGood;
+      var clipList1    = clipListGood;
+      var containerId2 = containerIdBad;
+      var clipList2    = clipListBad;
+    };
+    
+    var seq1 = Popcorn.sequence( containerId1, clipList1);
+    var seq2;
+    seq1.listen("canplaythrough", function(){
+      console.log("seq0 canplaythrough");
+      setTimeout ( function(){
+        console.log("now loading seq2");
+        seq2 = Popcorn.sequence( containerId2, clipList2)
+      }, 100 );
+    });
+    
+  }, false); // DOM content loaded
+}
 
 function loadParallelPair() {
   document.addEventListener("DOMContentLoaded", function () {
@@ -122,15 +171,10 @@ function loadParallelPair() {
       bestParts[102], //9
   	];
     console.log("CL1: ", clipList1Good, "CL2: ", clipList2Good);
-    
-    
-    
     var vpIds1Good = [11, 22, 35, 50, 69, 133];
     var vpIds2Good = [44, 58, 72, 122, 85, 102];
     var vpIdsStrGood = vpIds1Good.concat(vpIds2Good).toString();
-    playerGood = new parallelPlayer("playerGood", "interactionWrapperLeft", clipList1Good, clipList2Good);
-    playerGood.setVpIds(vpIdsStrGood);
-    playerGood.setRecurring(true);
+
 
     // bad
     var clipList1Bad = [
@@ -150,47 +194,57 @@ function loadParallelPair() {
       worstParts[48 ], //src4
       worstParts[12 ], //src1
     ];
-
     console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
-    
-    
     var vpIds1Bad = [11, 22, 35, 50, 69, 133];
     var vpIds2Bad = [44, 58, 72, 122, 85, 102];
     var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
     
-    console.log(playerGood.seqs[0]);
+    // load good and bad clip left or right based on coin flip
+    if (Math.round(Math.random())) {
+      // heads
+      var containerIdGood = "interactionWrapperLeft";
+      var containerIdBad  = "interactionWrapperRight";
+
+    }
+    else {
+      // tails
+      var containerIdGood = "interactionWrapperRight";
+      var containerIdBad  = "interactionWrapperLeft";
+    }
     
+    // init players one after the other
+    playerGood = new parallelPlayer("playerGood", containerIdGood, clipList1Good, clipList2Good);
+    playerGood.setVpIds(vpIdsStrGood);
+    // playerGood.setRecurring(true);
+    
+    // load playerBad after playerGood canplaythrough
     playerGood.seqs[0].listen("canplaythrough", function(){
       playerGood.canPlayThrough[0] = true;
       if (playerGood.canPlayThrough[1]) {
-        console.log("***starting 2nd player soon...")
+        // console.log("***starting 2nd player soon...")
         setTimeout ( function(){
-          console.log("***now!");
-        }, 10000 );
+          // console.log("***now!");
+          console.log("now constructing playerBad");
+          playerBad = new parallelPlayer("playerBad", containerIdBad, clipList1Bad, clipList2Bad);
+          playerBad.setVpIds(vpIdsStrBad);
+          // playerBad.setRecurring(true);
+        }, 5000 );
       };
     });
     playerGood.seqs[1].listen("canplaythrough", function(){
       // console.log("seq 1 canplaythrough");
       playerGood.canPlayThrough[1] = true;
       if (playerGood.canPlayThrough[0]) {
-        console.log("***starting 2nd player soon...")
+        // console.log("***starting 2nd player soon...")
         setTimeout ( function(){
-          console.log("***now!");
+          // console.log("***now!");
           console.log("now constructing playerBad");
-          playerBad = new parallelPlayer("playerBad", "interactionWrapperRight", clipList1Bad, clipList2Bad);
+          playerBad = new parallelPlayer("playerBad", containerIdBad, clipList1Bad, clipList2Bad);
           playerBad.setVpIds(vpIdsStrBad);
-          playerBad.setRecurring(true);
-        }, 10000 );
+          // playerBad.setRecurring(true);
+        }, 5000 );
       };
     });
-    
-    // setTimeout(function(){
-      // console.log("now constructing playerBad");
-      // playerBad = new parallelPlayer("playerBad", "interactionWrapperRight", clipList1Bad, clipList2Bad);
-      // playerBad.setVpIds(vpIdsStrBad);
-      // playerBad.setRecurring(true);      
-    // }, 1000)  
-
   }, false); // DOM content loaded
 }
 

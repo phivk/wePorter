@@ -362,7 +362,6 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
         // set enable counting
         self.bPlaying = true;
         // hide playButton
-        // toggleVisibility("playButton");
         console.log("playbutton jq:",$("#"+self.interactionWrapperId+" #playButton"));
         $("#"+self.interactionWrapperId+" #playButton").hide();
       }
