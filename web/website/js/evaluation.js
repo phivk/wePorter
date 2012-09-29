@@ -1,3 +1,5 @@
+console.log("evaluation.js");
+
 var srcList = [
 "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_00.webm", 
 "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_01.webm",
@@ -112,6 +114,7 @@ var worstParts = {
 
 function loadSeqPair(n, goodIdList, badIdList) {
   document.addEventListener("DOMContentLoaded", function () {
+    console.log("now loading seqPair");
     var clipListGood = [                               
       bestParts[goodIdList[0]],
       bestParts[goodIdList[1]],
@@ -168,6 +171,7 @@ function loadSeqPair(n, goodIdList, badIdList) {
 
 function loadParallelPair() {
   document.addEventListener("DOMContentLoaded", function () {
+    console.log("now loading parallelPair");
     // good
     var clipList1Good = [
       bestParts[11],  //src1
@@ -267,7 +271,7 @@ function loadParallelPair() {
 
 function loadVideoPair(n, goodId, badId) {
   document.addEventListener("DOMContentLoaded", function () {
-    
+    console.log("now loading videoPair");
     var clipListGood = [                               
       bestParts[goodId]
     ];
