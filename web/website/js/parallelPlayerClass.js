@@ -246,8 +246,8 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
       console.log("self.playerWrapperIds: "+ self.playerWrapperIds);
     };
     
-    $('.focusBlock').removeClass('focusBlock').addClass('focusBlock-js');
-    $('.playerWrapper').hover(
+    $("#"+self.interactionWrapperId+" .focusBlock").removeClass('focusBlock').addClass('focusBlock-js');
+    $("#"+self.interactionWrapperId+" .playerWrapper").hover(
       function(){
         // console.log("mouse entry");
         /// mouse entry ///
@@ -342,9 +342,9 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
     var self = this;
     // var playButtonHtml = "<p><a name='playButton' id='playButton' class='button' style='position: absolute; top: 29.3%; left: 150px;'>Play >></a></p>";
     var playButtonHtml = "<p><a name='playButton' id='playButton' class='button' style='position: absolute; top: 270px; left: 150px;'>Play >></a></p>";
-    $("#"+interactionWrapperId).append(playButtonHtml);
+    $("#"+self.interactionWrapperId).append(playButtonHtml);
     // attach click handler to Play button
-    $('a[name="playButton"]').on('click', function(){  
+    $('#'+self.interactionWrapperId+' a[name="playButton"]').on('click', function(){  
       // if any is playing: pause all
       if(!self.seqs[0].eq(self.seqs[0].active).paused() || !self.seqs[1].eq(self.seqs[1].active).paused()){
         console.log("pause!");
@@ -361,8 +361,10 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
         self.seqs[1].play();
         // set enable counting
         self.bPlaying = true;
-        // TODO
-        toggleVisibility("playButton");
+        // hide playButton
+        // toggleVisibility("playButton");
+        console.log("playbutton jq:",$("#"+self.interactionWrapperId+" #playButton"));
+        $("#"+self.interactionWrapperId+" #playButton").hide();
       }
     });
   }
@@ -489,18 +491,17 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   
   function insertLoading() {
     var loaderImgHtml = "<img id='loaderImg' style='position: absolute; top: 273px; left: 180px;' src='./content/gif/loading.gif'/>";
-    console.log(interactionWrapperId);
-    console.log($("#"+interactionWrapperId));
-    $("#"+interactionWrapperId).append(loaderImgHtml);
+    $("#"+this.interactionWrapperId).append(loaderImgHtml);
   }
   
   function showLoading() {
-    $("#loaderImg").show();
+    // $("#loaderImg").show();
+    $("#"+this.interactionWrapperId+" #loaderImg").show();
   }
   
   function hideLoading() {
-    $("#loaderImg").hide();
-    // document.getElementById("loaderImg").style.visibility = "hidden";
+    // $("#loaderImg").hide();
+    $("#"+this.interactionWrapperId+" #loaderImg").hide();
   }
   
   function setEndModal(modalId) {

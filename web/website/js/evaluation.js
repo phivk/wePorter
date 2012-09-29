@@ -123,14 +123,12 @@ function loadParallelPair() {
   	];
     console.log("CL1: ", clipList1Good, "CL2: ", clipList2Good);
     
-    // var containerIdsGood = [ "sequencePlayer1Left", "sequencePlayer2Left" ];
-    // var playerWrapperIdsGood = [ "playerWrapper1Left", "playerWrapper2Left" ];
-    // var playerGood = new parallelPlayer("playerGood", containerIdsGood, playerWrapperIdsGood, clipList1Good, clipList2Good);
-    playerGood = new parallelPlayer("playerGood", "interactionWrapperRight", clipList1Good, clipList2Good);
+    
     
     var vpIds1Good = [11, 22, 35, 50, 69, 133];
     var vpIds2Good = [44, 58, 72, 122, 85, 102];
     var vpIdsStrGood = vpIds1Good.concat(vpIds2Good).toString();
+    playerGood = new parallelPlayer("playerGood", "interactionWrapperLeft", clipList1Good, clipList2Good);
     playerGood.setVpIds(vpIdsStrGood);
     playerGood.setRecurring(true);
 
@@ -153,15 +151,45 @@ function loadParallelPair() {
       worstParts[12 ], //src1
     ];
 
-    // console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
-    // var playerBad = new parallelPlayer("playerBad", clipList1Bad, clipList2Bad);
-    // 
-    // var vpIds1Bad = [11, 22, 35, 50, 69, 133];
-    // var vpIds2Bad = [44, 58, 72, 122, 85, 102];
-    // var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
-    // playerBad.setVpIds(vpIdsStrBad);
-    // playerBad.setRecurring(true);
+    console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
     
+    
+    var vpIds1Bad = [11, 22, 35, 50, 69, 133];
+    var vpIds2Bad = [44, 58, 72, 122, 85, 102];
+    var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
+    
+    console.log(playerGood.seqs[0]);
+    
+    playerGood.seqs[0].listen("canplaythrough", function(){
+      playerGood.canPlayThrough[0] = true;
+      if (playerGood.canPlayThrough[1]) {
+        console.log("***starting 2nd player soon...")
+        setTimeout ( function(){
+          console.log("***now!");
+        }, 10000 );
+      };
+    });
+    playerGood.seqs[1].listen("canplaythrough", function(){
+      // console.log("seq 1 canplaythrough");
+      playerGood.canPlayThrough[1] = true;
+      if (playerGood.canPlayThrough[0]) {
+        console.log("***starting 2nd player soon...")
+        setTimeout ( function(){
+          console.log("***now!");
+          console.log("now constructing playerBad");
+          playerBad = new parallelPlayer("playerBad", "interactionWrapperRight", clipList1Bad, clipList2Bad);
+          playerBad.setVpIds(vpIdsStrBad);
+          playerBad.setRecurring(true);
+        }, 10000 );
+      };
+    });
+    
+    // setTimeout(function(){
+      // console.log("now constructing playerBad");
+      // playerBad = new parallelPlayer("playerBad", "interactionWrapperRight", clipList1Bad, clipList2Bad);
+      // playerBad.setVpIds(vpIdsStrBad);
+      // playerBad.setRecurring(true);      
+    // }, 1000)  
 
   }, false); // DOM content loaded
 }
