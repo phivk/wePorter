@@ -126,8 +126,7 @@ function loadParallelPair() {
     // var containerIdsGood = [ "sequencePlayer1Left", "sequencePlayer2Left" ];
     // var playerWrapperIdsGood = [ "playerWrapper1Left", "playerWrapper2Left" ];
     // var playerGood = new parallelPlayer("playerGood", containerIdsGood, playerWrapperIdsGood, clipList1Good, clipList2Good);
-    var interActionWrapperId = "interactionWrapper";
-    playerGood = new parallelPlayer("playerGood", interActionWrapperId, clipList1Good, clipList2Good);
+    playerGood = new parallelPlayer("playerGood", "interactionWrapperRight", clipList1Good, clipList2Good);
     
     var vpIds1Good = [11, 22, 35, 50, 69, 133];
     var vpIds2Good = [44, 58, 72, 122, 85, 102];
@@ -154,14 +153,14 @@ function loadParallelPair() {
       worstParts[12 ], //src1
     ];
 
-    //     console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
-    //     var playerBad = new parallelPlayer("playerBad", clipList1Bad, clipList2Bad);
-    //     
-    //     var vpIds1Bad = [11, 22, 35, 50, 69, 133];
-    //     var vpIds2Bad = [44, 58, 72, 122, 85, 102];
-    //     var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
-    //     playerBad.setVpIds(vpIdsStrBad);
-    //     playerBad.setRecurring(true);
+    // console.log("CL1: ", clipList1Bad, "CL2: ", clipList2Bad);
+    // var playerBad = new parallelPlayer("playerBad", clipList1Bad, clipList2Bad);
+    // 
+    // var vpIds1Bad = [11, 22, 35, 50, 69, 133];
+    // var vpIds2Bad = [44, 58, 72, 122, 85, 102];
+    // var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
+    // playerBad.setVpIds(vpIdsStrBad);
+    // playerBad.setRecurring(true);
     
 
   }, false); // DOM content loaded

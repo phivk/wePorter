@@ -48,19 +48,19 @@
             <div class="six columns">
         
               <!-- parallel player left -->
-              <div id="interactionWrapper" class="panel" onload="resetCount()">
+              <div id="interactionWrapperLeft" class="panel" onload="resetCount()">
                 <div class="sequenceWrapper">
-                  <div id='playerWrapper1' class='playerWrapper'>
+                  <div id='playerWrapper1Left' class='playerWrapper'>
                     <div class="focusBlock"></div>
-                    <div id="sequencePlayer1" class="videoBox"></div>
+                    <div id="sequencePlayer1Left" class="videoBox"></div>
                   </div>
                   <div class="data-wrapper">
                   </div>
                 </div>
                 <div class="sequenceWrapper">
-                  <div id='playerWrapper2' class='playerWrapper'>
+                  <div id='playerWrapper2Left' class='playerWrapper'>
                     <div class="focusBlock"></div>
-                    <div id="sequencePlayer2" class="videoBox"></div>
+                    <div id="sequencePlayer2Left" class="videoBox"></div>
                   </div>
                   <div class="data-wrapper">
                   </div>

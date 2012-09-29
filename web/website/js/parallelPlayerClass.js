@@ -9,6 +9,9 @@
 
 // Parallel Player class for 2 sequences playing in parallel
 function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
+  // DEBUG
+  // $("#"+interactionWrapperId).css("border", "1px dashed blue");
+
   // debug flag
   this.debug = true;
   this.playerObjName = objName;
@@ -27,6 +30,7 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   var containerId2 = $("#"+interactionWrapperId+" .videoBox:eq(1)").attr("id");
   var playerWrapperId1 = $("#"+interactionWrapperId+" .playerWrapper:eq(0)").attr("id");
   var playerWrapperId2 = $("#"+interactionWrapperId+" .playerWrapper:eq(1)").attr("id");
+  this.interactionWrapperId = interactionWrapperId;
   this.containerIds = [ containerId1, containerId2 ];  
   this.playerWrapperIds = [ playerWrapperId1, playerWrapperId2 ];  
 
@@ -318,7 +322,7 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
         setTimeout ( function(){
           self.insertPlayButton();
           self.hideLoading();
-        }, 3000 );
+        }, 5000 );
       };
     });
     self.seqs[1].listen("canplaythrough", function(){
@@ -328,7 +332,7 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
         setTimeout ( function(){
           self.insertPlayButton();
           self.hideLoading();
-        }, 3000 );
+        }, 5000 );
       };
     });
   };
@@ -336,8 +340,9 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   // insert playButton html
   function insertPlayButton() {
     var self = this;
-    var playButtonHtml = "<p><a name='playButton' id='playButton' class='button'>Play >></a></p>";
-    $("#interactionWrapper").append(playButtonHtml);
+    // var playButtonHtml = "<p><a name='playButton' id='playButton' class='button' style='position: absolute; top: 29.3%; left: 150px;'>Play >></a></p>";
+    var playButtonHtml = "<p><a name='playButton' id='playButton' class='button' style='position: absolute; top: 270px; left: 150px;'>Play >></a></p>";
+    $("#"+interactionWrapperId).append(playButtonHtml);
     // attach click handler to Play button
     $('a[name="playButton"]').on('click', function(){  
       // if any is playing: pause all
@@ -483,8 +488,10 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   }
   
   function insertLoading() {
-    var loaderImgHtml = "<img id='loaderImg' style='position: absolute; top: 47%; left: 180px;' src='./content/gif/loading.gif'/>";
-    $("#interactionWrapper").append(loaderImgHtml);
+    var loaderImgHtml = "<img id='loaderImg' style='position: absolute; top: 273px; left: 180px;' src='./content/gif/loading.gif'/>";
+    console.log(interactionWrapperId);
+    console.log($("#"+interactionWrapperId));
+    $("#"+interactionWrapperId).append(loaderImgHtml);
   }
   
   function showLoading() {
