@@ -88,9 +88,20 @@ var worstParts = {
   142: {src:  srcList[11], in: 371, out: 380} 
 }
 
-loadParallelPair();
+// loadParallelPair();
 
-// loadSeqPair(1, [])
+// best seq
+// [22, 35, 50, 69, 85, 133]
+// worst seq
+// [3, 40, 47, 56, 70, 142]
+// loadSeqPair(1, [35, 22, 50, 69, 85, 133], [40, 3, 47, 56, 70, 142])
+
+// good alt seq
+// [45, 46, 79, 83, 99, 112]
+// bad alt seq
+// [8, 41, 48, 62, 78, 113]
+// loadSeqPair(2, [45, 46, 79, 83, 99, 112], [41, 8, 48, 62, 78, 113])
+
 
 // loadVideoPair(4, 11, 3);
 // loadVideoPair(5, 35, 40);
@@ -102,10 +113,21 @@ loadParallelPair();
 function loadSeqPair(n, goodIdList, badIdList) {
   document.addEventListener("DOMContentLoaded", function () {
     var clipListGood = [                               
-      bestParts[goodId]
+      bestParts[goodIdList[0]],
+      bestParts[goodIdList[1]],
+      bestParts[goodIdList[2]],
+      bestParts[goodIdList[3]],
+      bestParts[goodIdList[4]],
+      bestParts[goodIdList[5]],
     ];
+    
     var clipListBad = [                               
-      worstParts[badId]
+      worstParts[badIdList[0]],
+      worstParts[badIdList[1]],
+      worstParts[badIdList[2]],
+      worstParts[badIdList[3]],
+      worstParts[badIdList[4]],
+      worstParts[badIdList[5]],
     ];
     
     // load good and bad clip left or right based on coin flip
@@ -123,30 +145,24 @@ function loadSeqPair(n, goodIdList, badIdList) {
     console.log(clipListBad);
     console.log(clipListGood);
     
-    // load last part first (otherwise parts 133, 142 wont load)
-    if (goodId < badId) {
-      var containerId1 = containerIdBad;
-      var clipList1 = clipListBad;
-      var containerId2 = containerIdGood;
-      var clipList2 = clipListGood;
-    }
-    else {
-      var containerId1 = containerIdGood;
-      var clipList1    = clipListGood;
-      var containerId2 = containerIdBad;
-      var clipList2    = clipListBad;
-    };
+    var containerId1 = containerIdGood;
+    var clipList1    = clipListGood;
+    var containerId2 = containerIdBad;
+    var clipList2    = clipListBad;
     
     var seq1 = Popcorn.sequence( containerId1, clipList1);
     var seq2;
     seq1.listen("canplaythrough", function(){
-      console.log("seq0 canplaythrough");
+      console.log("seq1 canplaythrough");
       setTimeout ( function(){
         console.log("now loading seq2");
-        seq2 = Popcorn.sequence( containerId2, clipList2)
+        seq2 = Popcorn.sequence( containerId2, clipList2);
+        seq2.listen("canplaythrough", function(){
+          console.log("seq2 canplaythrough");
+        });
       }, 100 );
     });
-    
+
   }, false); // DOM content loaded
 }
 
@@ -189,7 +205,8 @@ function loadParallelPair() {
     var clipList2Bad = [
       worstParts[40 ], //src3
       worstParts[63 ], //src5
-      worstParts[78 ], //src7
+      // worstParts[78 ], //src7
+      worstParts[70 ], //src7
       worstParts[142], //src11
       worstParts[48 ], //src4
       worstParts[12 ], //src1
