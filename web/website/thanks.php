@@ -42,6 +42,7 @@
 					<hr/>
 					<div class="alert-box success">
             <h3>Thank you for participating!</h3>
+            <p>You would help me even more by sharing tinyurl.com/weporter with some more friendly people!</p>
             <a href="" class="close">&times;</a>
           </div>					
 	    </div> <!-- end of 12 colums -->

@@ -61,8 +61,8 @@
         $(document).foundationCustomForms();
       });
       // *number
-      // load pair of sequences into video container divs
-      loadSeqPair(2, [35, 22, 50, 69, 85, 133], [40, 3, 47, 56, 70, 142])
+      // load pair of sequences into video container divs, get global positioning var
+      positioning = loadSeqPair(2, [35, 22, 50, 69, 85, 133], [40, 3, 47, 56, 70, 142]);
     </script>
     
 	  <div class="row">
@@ -97,6 +97,7 @@
             <!-- *number -->
             <?php
     			    getPairFormHtml(2); //*number
+    			    getInsertPositioningScriptHtml(2);  			    
     			  ?>
     	    </div> <!-- end of 12 colums -->
     	  </div> <!-- end of row -->
@@ -113,25 +114,10 @@
     		</div>
 		  </div>
 		</div>
-    
-    <!-- Client side form validation -->
-    <script language="JavaScript" type="text/javascript" xml:space="preserve">
-      var frmvalidator  = new Validator("evaluationForm2"); // *number*
-      frmvalidator.EnableOnPageErrorDisplaySingleBox();
-      frmvalidator.EnableMsgsTogether();
-
-      frmvalidator.addValidation("formInformativeLeft","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formEntertainingLeft","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formInterestingLeft","dontselect=000","Please choose an option");
-
-      frmvalidator.addValidation("formInformativeRight","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formEntertainingRight","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formInterestingRight","dontselect=000","Please choose an option");
-
-      frmvalidator.addValidation("formPreference","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formWhy","maxlen=500", "Please use 500 characters or less");
-    </script>
-    
+		
+		<?php
+	    getPairValidationHtml(2); //*number
+	  ?>
       	
 		<!-- Included JS Files (Compressed) -->
 	  <script src="css/foundation-3.0.7/javascripts/foundation.js"></script>

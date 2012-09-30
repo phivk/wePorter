@@ -61,8 +61,8 @@
         $(document).foundationCustomForms();
       });
       // *number
-      // load pair of sequences into video container divs
-      loadVideoPair(8, 69 , 70 );
+      // load pair of sequences into video container divs, get global positioning var
+      positioning = loadVideoPair(8, 69 , 70 );
     </script>
     
 	  <div class="row">
@@ -97,6 +97,7 @@
             <!-- *number -->
             <?php
     			    getPairFormHtml(8); //*number
+    			    getInsertPositioningScriptHtml(8);
     			  ?>
     	    </div> <!-- end of 12 colums -->
     	  </div> <!-- end of row -->
@@ -114,23 +115,9 @@
 		  </div>
 		</div>
     
-    <!-- Client side form validation -->
-    <script language="JavaScript" type="text/javascript" xml:space="preserve">
-      var frmvalidator  = new Validator("evaluationForm8"); // *number*
-      frmvalidator.EnableOnPageErrorDisplaySingleBox();
-      frmvalidator.EnableMsgsTogether();
-
-      frmvalidator.addValidation("formInformativeLeft","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formEntertainingLeft","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formInterestingLeft","dontselect=000","Please choose an option");
-
-      frmvalidator.addValidation("formInformativeRight","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formEntertainingRight","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formInterestingRight","dontselect=000","Please choose an option");
-
-      frmvalidator.addValidation("formPreference","dontselect=000","Please choose an option");
-      frmvalidator.addValidation("formWhy","maxlen=500", "Please use 500 characters or less");
-    </script>
+    <?php
+	    getPairValidationHtml(8); //*number
+	  ?>
     
       	
 		<!-- Included JS Files (Compressed) -->

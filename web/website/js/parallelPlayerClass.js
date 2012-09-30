@@ -13,7 +13,7 @@ function parallelPlayer(objName, interactionWrapperId, clipList1, clipList2){
   // $("#"+interactionWrapperId).css("border", "1px dashed blue");
 
   // debug flag
-  this.debug = true;
+  this.debug = false;
   this.playerObjName = objName;
   
   // check for equal length of clipLists

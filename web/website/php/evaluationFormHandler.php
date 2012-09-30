@@ -81,7 +81,7 @@ class EvaluationHandler
         echo "personId not set";
       }    
       // DEBUG
-      if ($DEBUG) {
+      if ($this->DEBUG) {
         echo "<br>1 record added<br>";
       }
     }
@@ -177,13 +177,15 @@ class EvaluationHandler
     $formData["preference"] = intval($this->mysqli->real_escape_string($this->POST["formPreference"]));
 
     // strings
+    $formData["positioning"] = $this->mysqli->real_escape_string($this->POST["formPositioning"]);
     $formData["why"] = $this->mysqli->real_escape_string(nl2br(strip_tags($this->POST["formWhy"])));
     
-    $insertQuery = "INSERT INTO Evaluations (`created`,`pair`,`informativeLeft`,`entertainingLeft`,`interestingLeft`,`informativeRight`,`entertainingRight`,`interestingRight`,`preference`,`why`)
+    $insertQuery = "INSERT INTO Evaluations (`created`,`pair`,`positioning`,`informativeLeft`,`entertainingLeft`,`interestingLeft`,`informativeRight`,`entertainingRight`,`interestingRight`,`preference`,`why`)
               VALUES
               (
               NOW(), '".
               $pair."', '".
+              $formData['positioning']."', '".
               $formData['informativeLeft']."', '".
               $formData['entertainingLeft']."', '". 
               $formData['interestingLeft']."', '".

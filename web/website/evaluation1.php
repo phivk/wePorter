@@ -14,7 +14,7 @@
   }
   $_SESSION['experiment']="evaluation";
 ?>
-
+<?php require_once('./include/content/evaluationQuestions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,7 +58,7 @@
         $(document).foundationCustomForms();
       });
       // *number
-      loadParallelPair();
+      positioning = loadParallelPair();
     </script>
     
 	  <div class="row">
@@ -84,14 +84,15 @@
             <p>In this experiment you will watch videos in pairs, one after the other. All videos are user-generated videos recorded at Queen Elizabeth's diamond jubilee celebration in London this summer.</p>
             <p>Videos are randomly positioned left and right. You will be asked to score the videos depending on how informative (about the jubilee event), entertaining and interesting you think they are. You will also be asked which of the two videos has your preference: which of the two would you rather watch?</p>
             <p>Please watch the videos in pairs, first left, then right. Next, answer the questions relating to that pair of videos, before moving on the the next pair.</p>
-            <p>There are 6 pairs of videos. Videos in the first half last 60 seconds each, videos in the second half last 10 seconds each. Total play time is 7 minutes. You can take breaks in between pairs.</p>
-            <p>Hit 'Submit' when you're done</p>
+            <p>There are 9 pairs of videos. Videos in the first 3 pairs last 1 minute each, videos in the latter 6 pairs last 10 seconds each. Total play time is 8 minutes. You can take breaks in between pairs.</p>
+            <p>Hit 'Continue' to proceed to the next videos</p>
             <p><strong>Thank you for participating!</strong></p>
             <a href="" class="close">&times;</a>
           </div>
 				  
 				  <?php
             require("./include/content/evaluationForm1.php"); // number
+            getInsertPositioningScriptHtml(1);
           ?>
 	    </div> <!-- end of 12 colums -->
 	  </div> <!-- end of row -->

@@ -1,4 +1,7 @@
-console.log("evaluation.js");
+/*
+  load video parts into pairs of parallel player, sequences or single videos 
+*/
+// console.log("evaluation.js");
 
 var srcList = [
 "http://doc.gold.ac.uk/~ma101pvk/weporter/video/jubilee/jubilee_00.webm", 
@@ -113,6 +116,19 @@ var worstParts = {
 // loadVideoPair(9, 133, 142);
 
 function loadSeqPair(n, goodIdList, badIdList) {
+  // load good and bad clip left or right based on coin flip
+  if (Math.round(Math.random())) {
+    // heads
+    var containerIdGood = "seq"+n+"left";
+    var containerIdBad = "seq"+n+"right";
+    var positioning = "LeftGoodRightBad";
+  }
+  else {
+    // tails
+    var containerIdGood = "seq"+n+"right";
+    var containerIdBad  = "seq"+n+"left";
+    var positioning = "RightGoodLeftBad";
+  }
   document.addEventListener("DOMContentLoaded", function () {
     console.log("now loading seqPair");
     var clipListGood = [                               
@@ -133,17 +149,7 @@ function loadSeqPair(n, goodIdList, badIdList) {
       worstParts[badIdList[5]],
     ];
     
-    // load good and bad clip left or right based on coin flip
-    if (Math.round(Math.random())) {
-      // heads
-      var containerIdGood = "seq"+n+"left";
-      var containerIdBad = "seq"+n+"right";
-    }
-    else {
-      // tails
-      var containerIdGood = "seq"+n+"right";
-      var containerIdBad  = "seq"+n+"left";
-    }   
+    
     
     console.log(clipListBad);
     console.log(clipListGood);
@@ -165,11 +171,24 @@ function loadSeqPair(n, goodIdList, badIdList) {
         });
       }, 100 );
     });
-
   }, false); // DOM content loaded
+  return positioning;
 }
 
 function loadParallelPair() {
+  // load good and bad clip left or right based on coin flip
+  if (Math.round(Math.random())) {
+    // heads
+    var containerIdGood = "interactionWrapperLeft";
+    var containerIdBad  = "interactionWrapperRight";
+    var positioning = "LeftGoodRightBad";
+  }
+  else {
+    // tails
+    var containerIdGood = "interactionWrapperRight";
+    var containerIdBad  = "interactionWrapperLeft";
+    var positioning = "RightGoodLeftBad";
+  }
   document.addEventListener("DOMContentLoaded", function () {
     console.log("now loading parallelPair");
     // good
@@ -219,20 +238,7 @@ function loadParallelPair() {
     var vpIds1Bad = [11, 22, 35, 50, 69, 133];
     var vpIds2Bad = [44, 58, 72, 122, 85, 102];
     var vpIdsStrBad = vpIds1Bad.concat(vpIds2Bad).toString();
-    
-    // load good and bad clip left or right based on coin flip
-    if (Math.round(Math.random())) {
-      // heads
-      var containerIdGood = "interactionWrapperLeft";
-      var containerIdBad  = "interactionWrapperRight";
-
-    }
-    else {
-      // tails
-      var containerIdGood = "interactionWrapperRight";
-      var containerIdBad  = "interactionWrapperLeft";
-    }
-    
+        
     // init players one after the other
     playerGood = new parallelPlayer("playerGood", containerIdGood, clipList1Good, clipList2Good);
     playerGood.setVpIds(vpIdsStrGood);
@@ -267,9 +273,23 @@ function loadParallelPair() {
       };
     });
   }, false); // DOM content loaded
+  return positioning;
 }
 
 function loadVideoPair(n, goodId, badId) {
+  // load good and bad clip left or right based on coin flip
+  if (Math.round(Math.random())) {
+    // heads
+    var containerIdGood = "seq"+n+"left";
+    var containerIdBad = "seq"+n+"right";
+    var positioning = "LeftGoodRightBad";
+  }
+  else {
+    // tails
+    var containerIdGood = "seq"+n+"right";
+    var containerIdBad  = "seq"+n+"left";
+    var positioning = "RightGoodLeftBad";
+  }
   document.addEventListener("DOMContentLoaded", function () {
     console.log("now loading videoPair");
     var clipListGood = [                               
@@ -279,17 +299,7 @@ function loadVideoPair(n, goodId, badId) {
       worstParts[badId]
     ];
     
-    // load good and bad clip left or right based on coin flip
-    if (Math.round(Math.random())) {
-      // heads
-      var containerIdGood = "seq"+n+"left";
-      var containerIdBad = "seq"+n+"right";
-    }
-    else {
-      // tails
-      var containerIdGood = "seq"+n+"right";
-      var containerIdBad  = "seq"+n+"left";
-    }   
+       
     
     console.log(clipListBad);
     console.log(clipListGood);
@@ -319,4 +329,5 @@ function loadVideoPair(n, goodId, badId) {
     });
     
   }, false); // DOM content loaded
+  return positioning;
 }
