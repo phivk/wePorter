@@ -8,6 +8,11 @@ class EvaluationHandler
   public $db_password = "root";
   public $db_name = "wePorter";
   
+  // public $db_servername = "localhost";
+  // public $db_username = "ma101pvk";
+  // public $db_password = "conrrite";
+  // public $db_name = "ma101pvk_weporter";
+  
   // mysqli db connection
   public $mysqli;
       

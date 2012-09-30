@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>include/content/evaluationForm1.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -13,61 +11,61 @@
 					<key>filename</key>
 					<string>handle_evaluationForms.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T00:59:22Z</date>
+					<date>2012-09-30T12:25:22Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation1.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:56:20Z</date>
+					<date>2012-09-30T14:30:33Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation2.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T02:02:03Z</date>
+					<date>2012-09-30T14:30:32Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation3.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:34:55Z</date>
+					<date>2012-09-30T14:17:13Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation4.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:37:42Z</date>
+					<date>2012-09-30T14:17:16Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation5.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:40:06Z</date>
+					<date>2012-09-30T14:17:15Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation6.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:41:30Z</date>
+					<date>2012-09-30T14:17:08Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation7.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:41:39Z</date>
+					<date>2012-09-30T14:17:07Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation8.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:41:45Z</date>
+					<date>2012-09-30T14:17:07Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
 					<string>evaluation9.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:42:06Z</date>
+					<date>2012-09-30T14:17:07Z</date>
 				</dict>
 				<dict>
 					<key>filename</key>
@@ -103,9 +101,11 @@
 					<key>filename</key>
 					<string>weporter.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T02:02:04Z</date>
+					<date>2012-09-30T14:17:14Z</date>
 				</dict>
 				<dict>
+					<key>expanded</key>
+					<true/>
 					<key>name</key>
 					<string>php</string>
 					<key>regexFolderFilter</key>
@@ -114,6 +114,8 @@
 					<string>php</string>
 				</dict>
 				<dict>
+					<key>expanded</key>
+					<true/>
 					<key>name</key>
 					<string>include</string>
 					<key>regexFolderFilter</key>
@@ -138,6 +140,8 @@
 					<string>content</string>
 				</dict>
 				<dict>
+					<key>expanded</key>
+					<true/>
 					<key>name</key>
 					<string>js</string>
 					<key>regexFolderFilter</key>
@@ -149,7 +153,7 @@
 					<key>filename</key>
 					<string>thanks.php</string>
 					<key>lastUsed</key>
-					<date>2012-09-30T01:56:07Z</date>
+					<date>2012-09-30T13:49:55Z</date>
 				</dict>
 			</array>
 			<key>expanded</key>
@@ -185,350 +189,6 @@
 	<integer>235</integer>
 	<key>metaData</key>
 	<dict>
-		<key>evaluation1.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>15</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>73</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>114</integer>
-			</dict>
-		</dict>
-		<key>evaluation2.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>79</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>evaluation3.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>77</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>evaluation4.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>37</integer>
-				<key>line</key>
-				<integer>103</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>83</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>95</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>37</integer>
-				<key>line</key>
-				<integer>103</integer>
-			</dict>
-		</dict>
-		<key>evaluation5.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>77</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-		</dict>
-		<key>evaluation6.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>77</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>evaluation7.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>78</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>evaluation8.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>78</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>evaluation9.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>78</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>11</integer>
-				<key>line</key>
-				<integer>99</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>12</integer>
-				<key>line</key>
-				<integer>97</integer>
-			</dict>
-		</dict>
-		<key>include/content/evaluationForm1.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>22</integer>
-				<key>line</key>
-				<integer>28</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>167</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>27</integer>
-				<key>line</key>
-				<integer>28</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>22</integer>
-				<key>line</key>
-				<integer>28</integer>
-			</dict>
-		</dict>
-		<key>include/content/evaluationQuestions.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>29</integer>
-				<key>line</key>
-				<integer>8</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>js/evaluation.js</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>30</integer>
-				<key>line</key>
-				<integer>112</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>89</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>3</integer>
-				<key>line</key>
-				<integer>112</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>30</integer>
-				<key>line</key>
-				<integer>112</integer>
-			</dict>
-		</dict>
 		<key>js/example_sequence.js</key>
 		<dict>
 			<key>caret</key>
@@ -543,52 +203,7 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>thanks.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>4</integer>
-				<key>line</key>
-				<integer>23</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>weporter.php</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>114</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>73</integer>
-		</dict>
 	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>js/evaluation.js</string>
-		<string>evaluation1.php</string>
-		<string>weporter.php</string>
-		<string>include/content/evaluationForm1.php</string>
-		<string>evaluation2.php</string>
-		<string>include/content/evaluationQuestions.php</string>
-		<string>thanks.php</string>
-		<string>evaluation3.php</string>
-		<string>evaluation4.php</string>
-		<string>evaluation5.php</string>
-		<string>evaluation6.php</string>
-		<string>evaluation7.php</string>
-		<string>evaluation8.php</string>
-		<string>evaluation9.php</string>
-	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
