@@ -14,7 +14,7 @@
   }
   $_SESSION['experiment']="evaluation";
 ?>
-
+<?php require_once('./include/content/evaluationQuestions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +36,10 @@
 		<!-- include jQuery -->
 		<script src="./js/jquery-1.7.2.js"></script>
 
-		<!-- include custom scripts -->    
+		<!-- include custom scripts -->
+		<!-- include JS validator -->
+    <script language="JavaScript" src="./include/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
+        
     <script type="text/javascript" src="./js/parallelPlayerClass.js"></script>
     <script type="text/javascript" src="./js/helpers.js"></script>
     <script type="text/javascript" src="./js/emitInteraction.js"></script>
@@ -58,7 +61,8 @@
         $(document).foundationCustomForms();
       });
       // *number
-      loadParallelPair();
+      // load pair of sequences into video container divs
+      loadVideoPair(7, 58 , 56 );
     </script>
     
 	  <div class="row">
@@ -77,22 +81,26 @@
     <!-- Main Content-->
 		<div class="row">
 	    <div class="twelve columns">
-					<h1>Evaluation</h1> 
-					<hr/>
-					<div class="alert-box">
-            <h3>Instructions</h3>
-            <p>In this experiment you will watch videos in pairs, one after the other. All videos are user-generated videos recorded at Queen Elizabeth's diamond jubilee celebration in London this summer.</p>
-            <p>Videos are randomly positioned left and right. You will be asked to score the videos depending on how informative (about the jubilee event), entertaining and interesting you think they are. You will also be asked which of the two videos has your preference: which of the two would you rather watch?</p>
-            <p>Please watch the videos in pairs, first left, then right. Next, answer the questions relating to that pair of videos, before moving on the the next pair.</p>
-            <p>There are 6 pairs of videos. Videos in the first half last 60 seconds each, videos in the second half last 10 seconds each. Total play time is 7 minutes. You can take breaks in between pairs.</p>
-            <p>Hit 'Submit' when you're done</p>
-            <p><strong>Thank you for participating!</strong></p>
-            <a href="" class="close">&times;</a>
-          </div>
-				  
-				  <?php
-            require("./include/content/evaluationForm1.php"); // number
-          ?>
+				<h1>Evaluation</h1> 
+				<hr/>
+				<div class="alert-box">
+          <h3>Instructions</h3>
+          <p>In this experiment you will watch videos in pairs, one after the other. All videos are user-generated videos recorded at Queen Elizabeth's diamond jubilee celebration in London this summer.</p>
+          <p>Videos are randomly positioned left and right. You will be asked to score the videos depending on how informative (about the jubilee event), entertaining and interesting you think they are. You will also be asked which of the two videos has your preference: which of the two would you rather watch?</p>
+          <p>Please watch the videos in pairs, first left, then right. Next, answer the questions relating to this pair of videos, before moving on the the next pair.</p>
+          <a href="" class="close">&times;</a>
+        </div>
+        
+        <div class="row">
+          <div class="twelve columns">
+            <!-- FORM -->
+            <!-- *number -->
+            <?php
+    			    getPairFormHtml(7); //*number
+    			  ?>
+    	    </div> <!-- end of 12 colums -->
+    	  </div> <!-- end of row -->
+    	              
 	    </div> <!-- end of 12 colums -->
 	  </div> <!-- end of row -->
 		
@@ -105,6 +113,25 @@
     		</div>
 		  </div>
 		</div>
+    
+    <!-- Client side form validation -->
+    <script language="JavaScript" type="text/javascript" xml:space="preserve">
+      var frmvalidator  = new Validator("evaluationForm7"); // *number*
+      frmvalidator.EnableOnPageErrorDisplaySingleBox();
+      frmvalidator.EnableMsgsTogether();
+
+      frmvalidator.addValidation("formInformativeLeft","dontselect=000","Please choose an option");
+      frmvalidator.addValidation("formEntertainingLeft","dontselect=000","Please choose an option");
+      frmvalidator.addValidation("formInterestingLeft","dontselect=000","Please choose an option");
+
+      frmvalidator.addValidation("formInformativeRight","dontselect=000","Please choose an option");
+      frmvalidator.addValidation("formEntertainingRight","dontselect=000","Please choose an option");
+      frmvalidator.addValidation("formInterestingRight","dontselect=000","Please choose an option");
+
+      frmvalidator.addValidation("formPreference","dontselect=000","Please choose an option");
+      frmvalidator.addValidation("formWhy","maxlen=500", "Please use 500 characters or less");
+    </script>
+    
       	
 		<!-- Included JS Files (Compressed) -->
 	  <script src="css/foundation-3.0.7/javascripts/foundation.js"></script>

@@ -65,6 +65,31 @@ class EvaluationHandler
     mysqli_close($this->mysqli);
   }
   
+  public function process_evaluation_data($pair){
+    if ($this->validateEvaluationData()) {
+      if ($this->DEBUG) {
+        echo "<br>evaluation validated<br>";
+      }
+      // store evaluation data
+      $evaluationId = $this->store_evaluation($pair);            
+      if (isset($_SESSION['personId'])) {
+        $personId = $_SESSION['personId'];
+        echo "person id: ", $personId;
+        $this->store_personId($personId, $evaluationId);
+      }
+      else {
+        echo "personId not set";
+      }    
+      // DEBUG
+      if ($DEBUG) {
+        echo "<br>1 record added<br>";
+      }
+    }
+    else {
+      exit("couldn't validate evalution data");
+    }
+  }
+  
   // validate person data, returns boolean whether validated
   public function validatePersonData() {
     $personValidator = new FormValidator();
@@ -89,40 +114,12 @@ class EvaluationHandler
     $evaluationValidator->addValidation("formPreference", "req","please choose formPreference");
     return $evaluationValidator->ValidateForm();
   }
-  
-  // extract person data from POST var  
-  public function extractPersonData(){
-    // Sanatize for SQL and convert to proper datatype
-    // strings
-    $formData['name'] = $this->mysqli->real_escape_string($this->POST['formName']);
-    $formData['email'] = $this->mysqli->real_escape_string($this->POST['formEmail']);
-    $formData['email'] = $this->mysqli->real_escape_string($this->POST['formEmail']);
 
-    $formData['age'] = intval($this->mysqli->real_escape_string($this->POST['formAge']));
-    $this->personData = $formData;
-  }
+  // DEPRECATED
+  // public function setPairData($pair){
+  //   $this->evaluationData["pair"] = $pair;
+  // }
   
-  // extract evaluation data from POST var
-  public function extractEvaluationData(){
-    // Sanatize for SQL and convert to proper datatype
-    // string to int
-    $formData["informativeLeft"] = intval($this->mysqli->real_escape_string($this->POST["formInformativeLeft"]));
-    $formData["entertainingLeft"] = intval($this->mysqli->real_escape_string($this->POST["formEntertainingLeft"]));
-    $formData["interestingLeft"] = intval($this->mysqli->real_escape_string($this->POST["formInterestingLeft"]));
-    $formData["informativeRight"] = intval($this->mysqli->real_escape_string($this->POST["formInformativeRight"]));
-    $formData["entertainingRight"] = intval($this->mysqli->real_escape_string($this->POST["formEntertainingRight"]));
-    $formData["interestingRight"] = intval($this->mysqli->real_escape_string($this->POST["formInterestingRight"]));
-    $formData["preference"] = intval($this->mysqli->real_escape_string($this->POST["formPreference"]));
-
-    // strings
-    $formData["why"] = $this->mysqli->real_escape_string(nl2br(strip_tags($this->POST["formWhy"])));        
-    $this->evaluationData = $formData;
-  }
-  
-  public function setPairData($pair){
-    $this->evaluationData["pair"] = $pair;
-  }
-
   // helper public function to check if table exists
   public function table_exists($tablename, $database = false) {
       if(!$database) {
@@ -147,14 +144,22 @@ class EvaluationHandler
   }
   
   public function store_person(){
+    // Sanatize for SQL and convert to proper datatype
+    // strings
+    $formData['name'] = $this->mysqli->real_escape_string($this->POST['formName']);
+    $formData['email'] = $this->mysqli->real_escape_string($this->POST['formEmail']);
+    $formData['email'] = $this->mysqli->real_escape_string($this->POST['formEmail']);
+
+    $formData['age'] = intval($this->mysqli->real_escape_string($this->POST['formAge']));
+    
     // insert Persons data into db
     $insertQuery = "INSERT INTO Persons (`created`,`formName`,`formEmail`,`formAge`)
               VALUES
               (
               NOW(), '".
-              $this->personData['name']."', '".
-              $this->personData['email']."', '".
-              $this->personData['age']."'
+              $formData['name']."', '".
+              $formData['email']."', '".
+              $formData['age']."'
               );";
     $this->mysqli->query($insertQuery) or die($this->mysqli->error.__LINE__);
     return $this->mysqli->insert_id;

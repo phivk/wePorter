@@ -12,14 +12,17 @@
     // new visitor
     $_SESSION['views']=1;
   }
-  $_SESSION['experiment']="weporter";
+  $_SESSION['experiment']="evaluation";
 ?>
 
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-		<title>wePorter Dissertation Project</title>
-		
+		<title>Evaluation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<meta name="generator" content="TextMate http://macromates.com/">
+  	<meta name="author" content="Philo van Kemenade">
+  	
 		<!-- include css -->
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
 		
@@ -29,10 +32,7 @@
 	  <script src="css/foundation-3.0.7/javascripts/modernizr.foundation.js"></script>
 
 		<!-- include popcorn.js -->
-    <!-- <script src="js/popcorn-complete.js"></script> -->
 		<script src="./js/popcorn-complete_1.3.js"></script>
-		
-
 		<!-- include jQuery -->
 		<script src="./js/jquery-1.7.2.js"></script>
 
@@ -40,6 +40,7 @@
     <script type="text/javascript" src="./js/parallelPlayerClass.js"></script>
     <script type="text/javascript" src="./js/helpers.js"></script>
     <script type="text/javascript" src="./js/emitInteraction.js"></script>
+    <script type="text/javascript" src="./js/evaluation.js"></script>
   </head>
   <body>
     <!-- run JS on load -->
@@ -54,9 +55,12 @@
           function () {
             $(this).css("text-decoration","none");
           });
+        $(document).foundationCustomForms();
       });
+      // *number
+      loadParallelPair();
     </script>
-      
+    
 	  <div class="row">
 	    <div class="twelve columns">
 	      <!-- Header -->
@@ -67,155 +71,41 @@
      				</ul>
    			  </div>
    		  </div>
-   		  
 	    </div>
 	  </div>  
 
     <!-- Main Content-->
 		<div class="row">
 	    <div class="twelve columns">
-        <!-- 10 colums left side -->
-        <!-- offset-by-one -->
-        <div class="ten columns"> 
-					<h1>wePorter</h1> 
-					
-					<?php require_once("./include/content/tabs.php") ?>
-					
-					<hr />
-					
+					<h1>Evaluation</h1> 
+					<hr/>
 					<div class="alert-box">
-					  <h4>Instructions</h4>
-					  <p >In this first experiment, you will be presented with two videos in parallel. This interaction takes 60 seconds.</p>
-            <p>Two videos are presented at once, but you can only 'focus' on one, making the video audible and clearly visible. Focus on a video by moving your mouse over it. The unfocussed video is still dimly visible, allowing you to look what's going on there. You are free to move your mouse over any of the two videos at any time.</p>
-            <p>The presented videos are recorded at the celebration of the Queen Elizabeth II Diamond jubilee in May in London.</p>
-            <p>You can try this experiment as many times as you like.</p>
-            <p>Once the two videos have loaded, hit PLAY to start the videos. (Please reload the page if one of them doesn't load). There will be no option to pause.</p>
+            <h3>Instructions</h3>
+            <p>In this experiment you will watch videos in pairs, one after the other. All videos are user-generated videos recorded at Queen Elizabeth's diamond jubilee celebration in London this summer.</p>
+            <p>Videos are randomly positioned left and right. You will be asked to score the videos depending on how informative (about the jubilee event), entertaining and interesting you think they are. You will also be asked which of the two videos has your preference: which of the two would you rather watch?</p>
+            <p>Please watch the videos in pairs, first left, then right. Next, answer the questions relating to that pair of videos, before moving on the the next pair.</p>
+            <p>There are 6 pairs of videos. Videos in the first half last 60 seconds each, videos in the second half last 10 seconds each. Total play time is 7 minutes. You can take breaks in between pairs.</p>
+            <p>Hit 'Submit' when you're done</p>
+            <p><strong>Thank you for participating!</strong></p>
             <a href="" class="close">&times;</a>
           </div>
-
-          <?php
-            require_once('./php/sequenceLoader.php');
-            
-            $sl = new sequenceLoader();
-            $sl->loadSequences();
-            $seqs = $sl->getSequences();
-            $vpIds = $sl->getVpIds();
-            $html = $sl->getHtmlFromSeqs($seqs);
-            // $htmlSetRecurring = $sl->getHtmlRecurring($_SESSION['views'] > 1);
-            
-            if ($debug) {
-              echo "<br>", "seq1 array: ", "<br>";
-              print_r($seqs[0]);
-              echo "<br>";
-              echo "seq2 array: ", "<br>";
-              print_r($seqs[1]);
-              echo "<br>";
-              echo "returned html: ", "<br>", htmlentities($html);
-            }
-            
-            // echo html w JS call to load Popcorn sequences
-            echo $html;
-            // echo $htmlSetRecurring;
-            
-            // $vpIdsStr = array2stringList($vpIds);
-            // $jsCallStr = '<script type="text/javascript">
-            //    testLoad("'.$vpIdsStr.'");
-            //  </script>';
-            // echo $jsCallStr;          
+				  
+				  <?php
+            require("./include/content/evaluationForm1.php"); // number
           ?>
-				  
-				  
-					<div id="interactionWrapper" class="panel" onload="resetCount()">
-
-						<!-- Video Player playing sequece -->
-						<div class="sequenceWrapper">
-							<div id='playerWrapper1' class='playerWrapper'>
-								<div class="focusBlock"></div>
-								<div id="sequencePlayer1" class="videoBox"></div>
-							</div>
-							<div class="data-wrapper">
-                <!-- <input id="sequencePlayer1Counter" class="counter" value="0"/> -->
-							</div>
-						</div>
-
-						<div class="sequenceWrapper">
-							<div id='playerWrapper2' class='playerWrapper'>
-								<div class="focusBlock"></div>
-								<div id="sequencePlayer2" class="videoBox"></div>
-							</div>
-							<div class="data-wrapper">
-								<!-- <input id="sequencePlayer2Counter" class="counter" value="0"/> -->
-							</div>
-						</div>
-
-            <!-- <p><a 
-              name = "playButton" 
-              id = "playButton" 
-              class="button">
-              Play >></a></p> -->
-					</div>  <!-- interaction wrapper  -->
-				</div> <!-- end of 10 colums -->
-			
 	    </div> <!-- end of 12 colums -->
 	  </div> <!-- end of row -->
 		
 		<div class="row">
 		  <div class="twelve columns">
-	    
 		    <div id="footer">
     			<ul>
     				<li> </li>
     			</ul>
     		</div>
-  		
 		  </div>
 		</div>
-	  
-	  <div id="welcomeModal" class="reveal-modal">
-      <h2>Welcome!</h2>
-      <p class="lead">This website lets you try a new way of watching videos online and at the same time contribute to a research project!
-      </p>
-      <p>Two videos are presented at once, but you can only 'focus' on one, making the video audible and clearly visible. The two videos sequences are automatically mixed together from parts of different videos. While you are watching, you're submitting data that helps to improve the mix!</p>
-      <p>You can try this experiment as many times as you like.</p>
-      <p>Please read the instructions before you start. <strong>Have fun!</strong></p>
-      <a class="close-reveal-modal">&#215;</a>
-    </div>
-	  
-		<div id="questionnaireModal" class="reveal-modal">
-      <h2>Thank you!</h2>
-      <p class="lead">You've just watched a sequence of video clips and helped a research project!</p>
-      
-      <!-- Include Questionnaire Form -->
-      <?php
-        require("./include/content/questionnaireForm.php");
-      ?>
-    
-      <p>Did you know that every time you complete a sequence, you're submitting data that helps the story to improve? Would you like to try again? That would really help me (and the story)...</p>
-      
-      <a class="close-reveal-modal">&#215;</a>
-      <!-- TODO submit form -->
-      <!-- <p><a 
-        href="weporter.html"
-        class="button">
-        Play more</a></p> -->
-    </div>
-    
-    <div id="thanksModal" class="reveal-modal">
-      <h2>Thank you!</h2>
-      <p class="lead">You've just watched a sequence of video clips and helped a research project!</p>
-      <p>Please continue to experiment 2 if you haven`t already.</p>
-      <p><a 
-        href="./posbias1.php"
-        class="medium success button">
-        Experiment 2</a></p>
-      <p>Did you know that every time you complete an interaction in this first experiment, you're submitting data that helps the story improve? Would you like to try again? That would really help me (and the story)!</p>
-      <a class="close-reveal-modal">&#215;</a>
-      <p><a 
-        href="./weporter.php"
-        class="button">
-        Play more >></a></p>      
-    </div>  
-	
+      	
 		<!-- Included JS Files (Compressed) -->
 	  <script src="css/foundation-3.0.7/javascripts/foundation.js"></script>
     <!-- Initialize JS Plugins -->

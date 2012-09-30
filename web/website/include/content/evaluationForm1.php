@@ -1,8 +1,5 @@
 <!-- include JS validator -->
 <script language="JavaScript" src="./include/gen_validatorv4.js" type="text/javascript" xml:space="preserve"></script>
-
-<?php require_once('./include/content/evaluationQuestions.php'); ?>
-
 <!-- FORM -->
 <div class="row">
   <div class="twelve columns">
@@ -10,7 +7,6 @@
 
       <div class="row">
         <div class="twelve columns">
-          <div id="questionForm_errorloc" class="error_strings"></div>
           <h4>About you</h4>
           <div class="row">
             <div class="ten columns">
@@ -29,8 +25,8 @@
       </div> <!-- row -->
             
       <hr/>
-      <h4>Video Pair1</h4> <!-- TODO number -->
-      <div class="row"> 
+      <h4>Video Pair1</h4>
+      <div class="row panel"> 
         <div class="twelve columns">
     
           <div class="row">
@@ -202,9 +198,10 @@
                  <label><strong>Why?</strong> (Optional)</label>
                  <textarea name="formWhy" rows="1" cols="25"></textarea>
                 </p>
+                
+                <input type="submit" name= "evaluation1" value="Continue >>" class="medium success button">    
 
               </div> <!-- radio row -->
-              
             </div> <!-- twelve col preference -->         
           </div> <!-- preference -->
     
@@ -212,16 +209,14 @@
       </div> <!-- PairParallel -->
 
       <?php
-        // Dont show reCaptcha for now in modal
+        // Dont show reCaptcha for now
         // require_once('./include/recaptcha/recaptchalib.php');
         // $publickey = "6LeludUSAAAAAErth0bVH4C5swQ4ILxWaYzBRNHA";
         // echo recaptcha_get_html($publickey);
       ?>
 
-     <div id="evaluationForm1_errorloc" class="error_strings">
-     </div>
-
-     <input type="submit" name= "evaluation1" value="Continue >>" class="medium success button">    
+     <div id="evaluationForm1_errorloc" class="error_strings"></div>
+     
     </form>
   </div> <!-- twelve columns -->
 </div> <!-- row -->
@@ -238,8 +233,8 @@
   frmvalidator.addValidation("formAge","req","Please enter your Age");
   frmvalidator.addValidation("formAge","num","Please use a number for Age");
 
-  // frmvalidator.addValidation("formEmail","req", "Please fill in your Email");
-  // frmvalidator.addValidation("formEmail","email");
+  frmvalidator.addValidation("formEmail","req", "Please fill in your Email");
+  frmvalidator.addValidation("formEmail","email");
   
   frmvalidator.addValidation("formInformativeLeft","dontselect=000","Please choose an option");
   frmvalidator.addValidation("formEntertainingLeft","dontselect=000","Please choose an option");
